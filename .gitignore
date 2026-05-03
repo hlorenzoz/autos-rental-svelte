@@ -8,7 +8,8 @@ node_modules/
 .svelte-kit/
 build/
 dist/
-.vercel/
+.vercel
+build_log.txt
 .netlify/
 .output/
 
