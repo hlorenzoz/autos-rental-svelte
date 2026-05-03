@@ -16,7 +16,7 @@
     "test:e2e:ui": "playwright test --ui",
     "lint": "eslint .",
     "typecheck": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "prepare": "lefthook install",
+    "prepare": "test -d .git && lefthook install || echo 'Skipping lefthook'",
     "lighthouse": "vite build && lhci autorun --config=.lighthouseci/lighthouserc.json"
   },
   "dependencies": {
