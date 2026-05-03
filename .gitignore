@@ -9,7 +9,7 @@ node_modules/
 build/
 dist/
 .vercel
-build_log.txt
+build_log*.txt
 .netlify/
 .output/
 
