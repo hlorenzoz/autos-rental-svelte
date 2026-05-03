@@ -1,0 +1,17 @@
+node_modules
+.svelte-kit
+build
+dist
+.env
+.env.*
+!.env.example
+coverage
+.vercel
+.output
+.DS_Store
+*.log
+.gemini
+.agents
+.atl
+.claude
+skills-lock.json

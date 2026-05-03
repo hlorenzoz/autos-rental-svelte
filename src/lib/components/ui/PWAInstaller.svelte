@@ -1,0 +1,147 @@
+<script lang="ts">
+  import { onMount } from 'svelte';
+  import { getDictionary } from '@/i18n/utils';
+  import type { Locale } from '@/i18n/utils';
+
+  interface Props {
+    locale: Locale;
+  }
+
+  let { locale }: Props = $props();
+  const t = $derived.by(() => getDictionary(locale));
+
+  let banner: HTMLDivElement | null = $state(null);
+  let visible = $state(false);
+  let bottomOffset = $state(24);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let deferredPrompt: any = null;
+
+  function updatePosition() {
+    const cookieBanner = document.getElementById('cookie-banner');
+    const isCookieVisible = cookieBanner && !cookieBanner.classList.contains('translate-y-full');
+
+    if (isCookieVisible) {
+      const cookieHeight = cookieBanner.offsetHeight;
+      bottomOffset = cookieHeight + 12;
+    } else {
+      bottomOffset = 24;
+    }
+  }
+
+  function hideBanner() {
+    visible = false;
+  }
+
+  async function install() {
+    if (!deferredPrompt) {
+      alert('Para instalar esta aplicación, usa la opción "Añadir a la pantalla de inicio" de tu navegador.');
+      return;
+    }
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      localStorage.setItem('pwa-installer-dismissed', 'true');
+      hideBanner();
+    }
+    deferredPrompt = null;
+  }
+
+  function close() {
+    localStorage.setItem('pwa-installer-dismissed', 'true');
+    hideBanner();
+  }
+
+  onMount(() => {
+    const isDismissed = localStorage.getItem('pwa-installer-dismissed');
+    if (isDismissed) return;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+
+    const trigger = document.getElementById('below-the-fold-trigger');
+    if (!trigger) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              updatePosition();
+              visible = true;
+            }, 2000);
+            observer.unobserve(trigger);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(trigger);
+
+    const interval = setInterval(updatePosition, 500);
+    window.addEventListener('resize', updatePosition);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', updatePosition);
+    };
+  });
+</script>
+
+<div
+  bind:this={banner}
+  id="pwa-installer"
+  class="fixed left-6 right-6 md:left-auto md:right-6 z-[90] transition-all duration-700 ease-out p-0 md:w-[450px]"
+  class:translate-y-full={!visible}
+  class:opacity-0={!visible}
+  class:pointer-events-none={!visible}
+  class:translate-y-0={visible}
+  class:opacity-100={visible}
+  style="bottom: {bottomOffset}px; will-change: transform, opacity, bottom;"
+  role="complementary"
+>
+  <div class="bg-surface-container-high/95 backdrop-blur-3xl border border-outline-variant/30 rounded-3xl p-5 md:p-6 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.4)] flex items-center gap-5 overflow-hidden relative group">
+    <!-- Glow effect -->
+    <div class="absolute -top-24 -left-24 w-48 h-48 bg-primary/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+    <div class="shrink-0 relative">
+      <div class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center shadow-inner overflow-hidden border border-outline-variant/20 p-2">
+        <img src="/icons/icon-192x192.png" alt="App Icon" class="w-full h-full object-contain rounded-full" />
+      </div>
+      <!-- Badge-like effect -->
+      <div class="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full border-2 border-surface-container-high flex items-center justify-center">
+        <span class="material-symbols-outlined text-on-primary text-[14px]">download</span>
+      </div>
+    </div>
+
+    <div class="flex-1 min-w-0 relative z-10">
+      <h3 class="font-display text-title-md text-on-surface font-bold truncate">
+        {t.legal.pwa.title}
+      </h3>
+      <p class="font-body text-body-sm text-on-surface-variant line-clamp-2 mt-1">
+        {t.legal.pwa.description}
+      </p>
+    </div>
+
+    <div class="flex items-center gap-3 shrink-0 relative z-10">
+      <button
+        id="install-pwa-btn"
+        onclick={install}
+        class="px-5 py-2.5 rounded-full bg-primary text-on-primary font-display text-label-lg font-bold flex items-center gap-2 hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95 shadow-lg shadow-primary/20"
+      >
+        <span class="material-symbols-outlined text-[18px]">download</span>
+        {t.legal.pwa.install}
+      </button>
+      <button
+        id="close-pwa-installer"
+        onclick={close}
+        class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-highest text-on-surface-variant transition-colors"
+        aria-label="Close"
+      >
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+  </div>
+</div>

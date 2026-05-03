@@ -1,0 +1,10 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: "*.{ts,svelte}"
+      run: bun run lint
+    typecheck:
+      run: bun run check
+    test:
+      run: bun run test:coverage
