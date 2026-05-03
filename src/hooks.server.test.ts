@@ -116,6 +116,13 @@ describe('handle (i18n URL middleware)', () => {
     expect(result.headers.get('Location')).toBe('/es/contacto/');
   });
 
+  it('redirects technical detail /es/vehicles/byd-seal/ to localized /es/vehiculos/byd-seal/', async () => {
+    const { result, resolve } = await callHandle('/es/vehicles/byd-seal/');
+    expect(resolve).not.toHaveBeenCalled();
+    expect(result.status).toBe(301);
+    expect(result.headers.get('Location')).toBe('/es/vehiculos/byd-seal/');
+  });
+
   it('does not rewrite English URLs', async () => {
     const { resolve, event } = await callHandle('/en/vehicles/for-sell/');
     expect(resolve).toHaveBeenCalled();

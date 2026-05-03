@@ -20,7 +20,7 @@
   const formattedPrice = $derived(price ? formatCurrency(price, locale) : '—');
   const priceSuffix = $derived(isRent ? ` ${t.vehicles.perDay}` : '');
 
-  const cardLink = $derived(`/${locale}/vehicles/${vehicle.slug}`);
+  const cardLink = $derived(`/${locale}/${t.nav.slugs.vehicles}/${vehicle.slug}`);
 </script>
 
 <article class="group bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/30 transition-all duration-500 hover:atmospheric-shadow hover:-translate-y-1">

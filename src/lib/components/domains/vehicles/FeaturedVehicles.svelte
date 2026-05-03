@@ -25,7 +25,7 @@
           {t.hero.subheadline.split('.')[0]}.
         </p>
       </div>
-      <Button href={`/${locale}/vehicles`} variant="ghost" class="hidden md:flex items-center gap-xs">
+      <Button href={`/${locale}${t.nav.links.inventory}`} variant="ghost" class="hidden md:flex items-center gap-xs">
         {t.vehicles.viewAll}
         <span class="material-symbols-outlined">arrow_forward</span>
       </Button>
@@ -34,7 +34,7 @@
     <VehicleGrid vehicles={featuredVehicles} {locale} />
 
     <div class="mt-lg md:hidden">
-      <Button href={`/${locale}/vehicles`} variant="secondary" class="w-full justify-center">
+      <Button href={`/${locale}${t.nav.links.inventory}`} variant="secondary" class="w-full justify-center">
         {t.vehicles.viewAll}
       </Button>
     </div>

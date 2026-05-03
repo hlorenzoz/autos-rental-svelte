@@ -53,6 +53,12 @@ export const handle: Handle = async ({ event, resolve }) => {
       return redirect('/es/legal/privacidad/');
     if (pathname === '/es/legal/terms' || pathname === '/es/legal/terms/')
       return redirect('/es/legal/terminos/');
+
+    // Dynamic vehicle detail redirects (technical → localized)
+    if (pathname.startsWith('/es/vehicles/')) {
+      const slug = pathname.replace('/es/vehicles/', '').replace(/\/$/, '');
+      if (slug) return redirect(`/es/vehiculos/${slug}/`);
+    }
   }
 
   return resolve(event);
