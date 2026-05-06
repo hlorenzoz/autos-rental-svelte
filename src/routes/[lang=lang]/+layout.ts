@@ -7,9 +7,6 @@ export const trailingSlash = 'always';
 
 export const load: LayoutLoad = ({ params }) => {
   const lang = params.lang as Locale;
-  if (!locales.includes(lang)) {
-    error(404, `Unknown locale: ${lang}`);
-  }
   const t = getDictionary(lang);
   return { locale: lang, t };
 };

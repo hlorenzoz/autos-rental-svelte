@@ -2,14 +2,14 @@
 
 This `AGENTS.md` document serves as the master specification and operating manual for any AI agent or automated developer acting upon this repository. It dictates the architectural standards, development workflows, testing strategies, and technology stack required to build, maintain, and scale this production-ready web application. 
 
-The primary goal is to ensure consistency, high performance, modularity, and strict adherence to Test-Driven Development (TDD) across all agent-generated or assisted code.
+The primary goal is to ensure consistency, high performance, modularity, and strict adherence to Test-Driven Development (TDD) across all agent-generated or assisted code following the SvelteKit official guidelines and best practices.
 
 Use global skills as required, not limited to those specified in this document.
 
-The goal is to migrate a Autos Rental website from Astro to SvelteKit. The website is composed of a frontend (marketing pages).
 
-The Astro project is in the folder: @autos-rental-astro/
-The Svelte project will be created in the folder: @autos-rental-svelte/
+# Project Context
+
+The goal is to implement a SvelteKit professional and premium website.
 
 ---
 

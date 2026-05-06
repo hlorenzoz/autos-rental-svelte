@@ -1,9 +1,8 @@
+import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
-import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [svelte({ hot: !process.env.VITEST })] as any,
+  plugins: [sveltekit()],
   test: {
     environment: 'jsdom',
     globals: true,
@@ -26,23 +25,13 @@ export default defineConfig({
         '**/*.config.*',
         'build/**',
         '.svelte-kit/**',
+        '.vercel/**',
         'tests/**',
         'static/**',
-        'src/hooks.server.ts',
         '**/*.svelte',
         'src/routes/**',
         'src/lib/components/**',
       ],
-    },
-  },
-  server: {
-    watch: {
-      ignored: ['**/node_modules/**', '**/build/**', '**/coverage/**'],
-    },
-  },
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, './src/lib'),
     },
   },
 });

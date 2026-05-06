@@ -43,6 +43,7 @@
     "globals": "^17.6.0",
     "jsdom": "^26.1.0",
     "lefthook": "^1.13.6",
+    "super-sitemap": "^1.0.12",
     "svelte-check": "^4.1.7",
     "tailwindcss": "^4.2.4",
     "typescript": "^5.9.3",

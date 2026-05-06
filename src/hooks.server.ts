@@ -4,6 +4,11 @@ import { building } from '$app/environment';
 export const handle: Handle = async ({ event, resolve }) => {
   const { pathname } = event.url;
 
+  // Handle common robots.txt typos
+  if (pathname === '/robot.txt' || pathname === '/robot.txt/' || pathname === '/robots.txt/') {
+    return new Response(null, { status: 301, headers: { Location: '/robots.txt' } });
+  }
+
   // We only handle redirects here.
   // Rewrites (localized -> technical) are now handled in src/hooks.ts via the reroute hook.
   if (!building && pathname.startsWith('/es/')) {

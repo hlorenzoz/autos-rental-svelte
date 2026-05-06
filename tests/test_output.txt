@@ -1,0 +1,126 @@
+
+> autos-rental-svelte@0.0.1 test:e2e
+> playwright test tests/sitemap.spec.ts
+
+
+Running 10 tests using 4 workers
+
+[1A[2K[1/10] [chromium] › tests/sitemap.spec.ts:35:3 › Sitemap Integrity › sitemap.xml should contain all expected URLs
+[1A[2K[2/10] [chromium] › tests/sitemap.spec.ts:69:3 › Sitemap Integrity › sitemap.xml should not contain technical English paths in Spanish locale
+[1A[2K[3/10] [firefox] › tests/sitemap.spec.ts:35:3 › Sitemap Integrity › sitemap.xml should contain all expected URLs
+[1A[2K[4/10] [firefox] › tests/sitemap.spec.ts:69:3 › Sitemap Integrity › sitemap.xml should not contain technical English paths in Spanish locale
+[1A[2K[chromium] › tests/sitemap.spec.ts:35:3 › Sitemap Integrity › sitemap.xml should contain all expected URLs
+Sample Expected: [ [32m'/'[39m, [32m'/en/'[39m, [32m'/es/'[39m, [32m'/en/about/'[39m, [32m'/es/sobre-nosotros/'[39m ]
+
+[1A[2KSample Sitemap: []
+
+[1A[2KTotal Expected: 61, Total Found: 0
+
+[1A[2KMissing paths in sitemap (first 10): [
+  [32m'/'[39m,
+  [32m'/en/'[39m,
+  [32m'/es/'[39m,
+  [32m'/en/about/'[39m,
+  [32m'/es/sobre-nosotros/'[39m,
+  [32m'/en/contact/'[39m,
+  [32m'/es/contacto/'[39m,
+  [32m'/en/legal/cookies/'[39m,
+  [32m'/es/legal/cookies/'[39m,
+  [32m'/en/legal/privacy/'[39m
+]
+
+[1A[2K  1) [chromium] › tests/sitemap.spec.ts:35:3 › Sitemap Integrity › sitemap.xml should contain all expected URLs 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoHaveLength[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected length: [32m0[39m
+    Received length: [31m61[39m
+    Received array:  [31m["/", "/en/", "/es/", "/en/about/", "/es/sobre-nosotros/", "/en/contact/", "/es/contacto/", "/en/legal/cookies/", "/es/legal/cookies/", "/en/legal/privacy/", …][39m
+
+      64 |     }
+      65 |
+    > 66 |     expect(missingPaths).toHaveLength(0);
+         |                          ^
+      67 |   });
+      68 |
+      69 |   test('sitemap.xml should not contain technical English paths in Spanish locale', async ({ page }) => {
+        at /Users/hlorenzoz/databank/Development/Companies/Dental Lopez/projects/migration/autos-rental-svelte/tests/sitemap.spec.ts:66:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/sitemap-Sitemap-Integrity--fcbd7-d-contain-all-expected-URLs-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/sitemap-Sitemap-Integrity--fcbd7-d-contain-all-expected-URLs-chromium/error-context.md
+
+
+[1A[2K[5/10] [webkit] › tests/sitemap.spec.ts:35:3 › Sitemap Integrity › sitemap.xml should contain all expected URLs
+[1A[2K[6/10] [webkit] › tests/sitemap.spec.ts:69:3 › Sitemap Integrity › sitemap.xml should not contain technical English paths in Spanish locale
+[1A[2K[firefox] › tests/sitemap.spec.ts:35:3 › Sitemap Integrity › sitemap.xml should contain all expected URLs
+Sample Expected: [ [32m'/'[39m, [32m'/en/'[39m, [32m'/es/'[39m, [32m'/en/about/'[39m, [32m'/es/sobre-nosotros/'[39m ]
+
+[1A[2KSample Sitemap: [ [32m'/'[39m, [32m'/en/'[39m, [32m'/en/about/'[39m, [32m'/en/contact/'[39m, [32m'/en/legal/cookies/'[39m ]
+
+[1A[2K[webkit] › tests/sitemap.spec.ts:35:3 › Sitemap Integrity › sitemap.xml should contain all expected URLs
+Sample Expected: [ [32m'/'[39m, [32m'/en/'[39m, [32m'/es/'[39m, [32m'/en/about/'[39m, [32m'/es/sobre-nosotros/'[39m ]
+
+[1A[2KSample Sitemap: [ [32m'/'[39m, [32m'/en/'[39m, [32m'/en/about/'[39m, [32m'/en/contact/'[39m, [32m'/en/legal/cookies/'[39m ]
+
+[1A[2K[7/10] [mobile-chrome] › tests/sitemap.spec.ts:69:3 › Sitemap Integrity › sitemap.xml should not contain technical English paths in Spanish locale
+[1A[2K[8/10] [mobile-safari] › tests/sitemap.spec.ts:35:3 › Sitemap Integrity › sitemap.xml should contain all expected URLs
+[1A[2K[9/10] [mobile-chrome] › tests/sitemap.spec.ts:35:3 › Sitemap Integrity › sitemap.xml should contain all expected URLs
+[1A[2K[mobile-chrome] › tests/sitemap.spec.ts:35:3 › Sitemap Integrity › sitemap.xml should contain all expected URLs
+Sample Expected: [ [32m'/'[39m, [32m'/en/'[39m, [32m'/es/'[39m, [32m'/en/about/'[39m, [32m'/es/sobre-nosotros/'[39m ]
+
+[1A[2KSample Sitemap: []
+
+[1A[2KTotal Expected: 61, Total Found: 0
+
+[1A[2KMissing paths in sitemap (first 10): [
+  [32m'/'[39m,
+  [32m'/en/'[39m,
+  [32m'/es/'[39m,
+  [32m'/en/about/'[39m,
+  [32m'/es/sobre-nosotros/'[39m,
+  [32m'/en/contact/'[39m,
+  [32m'/es/contacto/'[39m,
+  [32m'/en/legal/cookies/'[39m,
+  [32m'/es/legal/cookies/'[39m,
+  [32m'/en/legal/privacy/'[39m
+]
+
+[1A[2K[mobile-safari] › tests/sitemap.spec.ts:35:3 › Sitemap Integrity › sitemap.xml should contain all expected URLs
+Sample Expected: [ [32m'/'[39m, [32m'/en/'[39m, [32m'/es/'[39m, [32m'/en/about/'[39m, [32m'/es/sobre-nosotros/'[39m ]
+
+[1A[2KSample Sitemap: [ [32m'/'[39m, [32m'/en/'[39m, [32m'/en/about/'[39m, [32m'/en/contact/'[39m, [32m'/en/legal/cookies/'[39m ]
+
+[1A[2K[10/10] [mobile-safari] › tests/sitemap.spec.ts:69:3 › Sitemap Integrity › sitemap.xml should not contain technical English paths in Spanish locale
+[1A[2K  2) [mobile-chrome] › tests/sitemap.spec.ts:35:3 › Sitemap Integrity › sitemap.xml should contain all expected URLs 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoHaveLength[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected length: [32m0[39m
+    Received length: [31m61[39m
+    Received array:  [31m["/", "/en/", "/es/", "/en/about/", "/es/sobre-nosotros/", "/en/contact/", "/es/contacto/", "/en/legal/cookies/", "/es/legal/cookies/", "/en/legal/privacy/", …][39m
+
+      64 |     }
+      65 |
+    > 66 |     expect(missingPaths).toHaveLength(0);
+         |                          ^
+      67 |   });
+      68 |
+      69 |   test('sitemap.xml should not contain technical English paths in Spanish locale', async ({ page }) => {
+        at /Users/hlorenzoz/databank/Development/Companies/Dental Lopez/projects/migration/autos-rental-svelte/tests/sitemap.spec.ts:66:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/sitemap-Sitemap-Integrity--fcbd7-d-contain-all-expected-URLs-mobile-chrome/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/sitemap-Sitemap-Integrity--fcbd7-d-contain-all-expected-URLs-mobile-chrome/error-context.md
+
+
+[1A[2K  2 failed
+    [chromium] › tests/sitemap.spec.ts:35:3 › Sitemap Integrity › sitemap.xml should contain all expected URLs 
+    [mobile-chrome] › tests/sitemap.spec.ts:35:3 › Sitemap Integrity › sitemap.xml should contain all expected URLs 
+  8 passed (7.6s)
+
+  Serving HTML report at http://localhost:55217. Press Ctrl+C to quit.
