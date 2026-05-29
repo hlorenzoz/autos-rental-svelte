@@ -17,9 +17,12 @@
     "lint": "eslint .",
     "typecheck": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "prepare": "test -d .git && lefthook install || echo 'Skipping lefthook'",
-    "lighthouse": "vite build && lhci autorun --config=.lighthouseci/lighthouserc.json"
+    "lighthouse": "vite build && lhci autorun --config=.lighthouseci/lighthouserc.json",
+    "icons:subset": "node scripts/subset-icons.mjs"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.2.8",
+    "@fontsource-variable/space-grotesk": "^5.2.10",
     "@sveltejs/kit": "^2.21.4",
     "svelte": "^5.33.12",
     "zod": "4.4.1"
@@ -29,7 +32,8 @@
     "@lhci/cli": "^0.14.0",
     "@playwright/test": "^1.59.1",
     "@sveltejs/adapter-vercel": "^6.3.3",
-    "@sveltejs/vite-plugin-svelte": "^5.1.0",
+    "@sveltejs/enhanced-img": "^0.10.4",
+    "@sveltejs/vite-plugin-svelte": "^6",
     "@tailwindcss/vite": "^4.2.4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/svelte": "^5.2.7",
@@ -44,6 +48,8 @@
     "globals": "^17.6.0",
     "jsdom": "^26.1.0",
     "lefthook": "^1.13.6",
+    "material-symbols": "^0.44.10",
+    "subset-font": "^2.5.0",
     "super-sitemap": "^1.0.12",
     "svelte-check": "^4.1.7",
     "tailwindcss": "^4.2.4",

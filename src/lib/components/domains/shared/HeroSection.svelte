@@ -3,6 +3,7 @@
   import { getDictionary } from '@/i18n/utils';
   import HeroSearchIsland from '@/components/ui/HeroSearchIsland.svelte';
   import { getSearchableVehicles } from '@/lib/vehicles';
+  import heroImg from '$lib/assets/vehicles/lamborghini-huracan-evo.webp?enhanced';
 
   interface Props {
     locale: Locale;
@@ -66,14 +67,12 @@
   <div class="hidden lg:block absolute right-[-5%] top-1/2 -translate-y-1/2 w-[45%] xl:w-[55%] h-[70%] pointer-events-none animate-in fade-in zoom-in duration-1000 delay-500 z-10">
     <div class="relative w-full h-full">
       <div class="absolute inset-0 bg-gradient-to-l from-surface via-transparent to-transparent z-10"></div>
-      <img
-        src="/vehicles/lamborghini-huracan-evo.webp"
+      <enhanced:img
+        src={heroImg}
         alt="Vicron Lopez Hero"
         class="w-full h-full object-cover rounded-l-[120px] border-l border-y border-outline-variant/20 shadow-2xl"
-        loading="eager"
         fetchpriority="high"
-        width={1200}
-        height={800}
+        sizes="(min-width: 1280px) 55vw, (min-width: 1024px) 45vw, 0px"
       />
     </div>
   </div>

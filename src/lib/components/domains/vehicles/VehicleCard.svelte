@@ -5,6 +5,7 @@
   import { formatCurrency } from '@/lib/formatters';
   import Badge from '@/components/ui/Badge.svelte';
   import Button from '@/components/ui/Button.svelte';
+  import VehicleImage from '@/components/ui/VehicleImage.svelte';
 
   interface Props {
     vehicle: Vehicle;
@@ -23,13 +24,11 @@
 <article class="group bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/30 transition-all duration-500 hover:atmospheric-shadow hover:-translate-y-1">
   <!-- Image Container -->
   <div class="relative aspect-[16/10] overflow-hidden">
-    <img
-      src={vehicle.image}
+    <VehicleImage
+      slug={vehicle.slug}
       alt={`${vehicle.brand} ${vehicle.model}`}
       class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-      loading="lazy"
-      width={600}
-      height={375}
+      sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
     />
 
     <!-- Top Badges -->

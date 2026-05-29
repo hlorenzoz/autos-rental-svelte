@@ -1,0 +1,27 @@
+/**
+ * Build-time map of vehicle slug -> processed `enhanced:img` source.
+ *
+ * Images live in `src/lib/assets/vehicles/{slug}.webp` and are processed by
+ * `@sveltejs/enhanced-img` (responsive avif/webp + intrinsic dimensions).
+ * The catalog is data-driven (vehicles.json), so we resolve images by slug
+ * through a static glob.
+ */
+import type { Picture } from '@sveltejs/enhanced-img';
+
+const modules = import.meta.glob<Picture>('$lib/assets/vehicles/*.webp', {
+  eager: true,
+  query: { enhanced: true },
+  import: 'default',
+});
+
+// Key the map by the bare filename (== vehicle slug).
+const bySlug = new Map<string, Picture>();
+for (const [path, mod] of Object.entries(modules)) {
+  const file = path.split('/').pop() ?? '';
+  const slug = file.replace(/\.webp$/, '');
+  bySlug.set(slug, mod);
+}
+
+export function getVehicleImage(slug: string): Picture | undefined {
+  return bySlug.get(slug);
+}

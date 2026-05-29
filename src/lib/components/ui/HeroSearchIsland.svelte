@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import SearchPill from '$lib/components/ui/SearchPill.svelte';
+  import VehicleImage from '$lib/components/ui/VehicleImage.svelte';
   import { getUniqueBrands, getUniqueCategories } from '@/lib/vehicles';
 
   interface SearchableVehicle {
@@ -131,11 +132,11 @@
                 class="flex items-center gap-md px-lg py-sm hover:bg-surface-container transition-colors duration-150 group"
                 onclick={() => { query = ''; }}
               >
-                <img
-                  src={v.image}
+                <VehicleImage
+                  slug={v.slug}
                   alt={`${v.brand} ${v.model}`}
                   class="w-16 h-10 object-cover rounded-lg shrink-0 border border-outline-variant/20"
-                  loading="lazy"
+                  sizes="64px"
                 />
                 <div class="flex-1 min-w-0">
                   <p class="text-on-surface font-semibold text-body-md truncate group-hover:text-primary transition-colors">

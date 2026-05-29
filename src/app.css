@@ -1,12 +1,25 @@
 @import "tailwindcss";
 
+/* Self-hosted variable text fonts (no render-blocking 3rd-party request) */
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/space-grotesk";
+
 /* Class-based dark mode — Tailwind v4 */
 @variant dark (&:where(.dark, .dark *));
 
+/* Self-hosted Material Symbols — subset to the icons we use (see scripts/subset-icons.mjs) */
+@font-face {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./lib/assets/fonts/material-symbols-outlined-subset.woff2") format("woff2");
+}
+
 @theme {
-  /* FONTS */
-  --font-display: "Space Grotesk", sans-serif;
-  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* FONTS — self-hosted variable families (Fontsource) */
+  --font-display: "Space Grotesk Variable", "Space Grotesk", sans-serif;
+  --font-body: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
 
   /* COLORS — Material Design 3 tonal system (Atmospheric Precision) */
 
@@ -214,6 +227,7 @@
   }
 
   .material-symbols-outlined {
+    font-family: "Material Symbols Outlined";
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
     user-select: none;
     font-size: inherit;

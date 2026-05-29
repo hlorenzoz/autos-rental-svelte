@@ -34,13 +34,7 @@
   <link rel="apple-touch-icon" href="/icons/icon-180.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <meta name="theme-color" content="#0043c8" />
-  <!-- Font loading: print trick for non-blocking -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;900&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
-    rel="stylesheet"
-  />
+  <!-- Fonts are self-hosted and bundled via app.css (Fontsource + subset icons) -->
 </svelte:head>
 
 {@render children()}
