@@ -17,8 +17,13 @@ export function getSearchableVehicles() {
     category: v.category,
     slug: v.slug,
     image: v.image,
-    pricePerDay: v.pricePerDay
+    type: v.type,
+    price: v.price
   }));
+}
+
+export function getVehiclesByType(filter: 'sale' | 'rent'): Vehicle[] {
+  return vehicles.filter((v) => v.type === filter || v.type === 'both');
 }
 
 export function getFeaturedVehicles(limit = 3): Vehicle[] {
@@ -26,9 +31,11 @@ export function getFeaturedVehicles(limit = 3): Vehicle[] {
 }
 
 export interface VehicleFilters {
+  type?: 'sale' | 'rent';
   category?: string;
   brand?: string;
   maxPricePerDay?: number;
+  maxPriceSale?: number;
   search?: string;
 }
 
@@ -37,6 +44,10 @@ export function filterVehicles(
   filters: VehicleFilters
 ): Vehicle[] {
   return vehicleList.filter((v) => {
+    if (filters.type !== undefined) {
+      if (v.type !== filters.type && v.type !== 'both') return false;
+    }
+
     if (filters.category !== undefined) {
       if (v.category !== filters.category) return false;
     }
@@ -46,7 +57,13 @@ export function filterVehicles(
     }
 
     if (filters.maxPricePerDay !== undefined) {
-      if (v.pricePerDay > filters.maxPricePerDay) return false;
+      if (v.price.rent === undefined || v.price.rent > filters.maxPricePerDay)
+        return false;
+    }
+
+    if (filters.maxPriceSale !== undefined) {
+      if (v.price.sale === undefined || v.price.sale > filters.maxPriceSale)
+        return false;
     }
 
     if (filters.search !== undefined && filters.search.trim() !== '') {
@@ -65,4 +82,18 @@ export function getUniqueBrands(vehicleList: { brand: string }[]): string[] {
 
 export function getUniqueCategories(vehicleList: { category: string }[]): string[] {
   return [...new Set(vehicleList.map((v) => v.category))].sort();
+}
+
+export function getVehiclePriceInfo(
+  vehicle: Vehicle,
+  preferredType?: 'sale' | 'rent'
+) {
+  const displayType =
+    preferredType || (vehicle.type === 'rent' ? 'rent' : 'sale');
+  const price = displayType === 'rent' ? vehicle.price.rent : vehicle.price.sale;
+
+  return {
+    price,
+    isRent: displayType === 'rent',
+  };
 }

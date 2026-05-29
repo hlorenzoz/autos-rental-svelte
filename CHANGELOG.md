@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Reintroduced vehicle sales alongside rentals for the demo site.** Restored the dual data model (`type: sale | rent | both` + `price: { sale?, rent? }`), the `getVehiclesByType` / `getVehiclePriceInfo` helpers and the `maxPriceSale` filter (`src/lib/schemas/vehicle.ts`, `src/lib/lib/vehicles.ts`). All 22 vehicles now carry sale and/or rental pricing.
+- Restored the dedicated **For Sale** and **For Rent** inventory routes (`/vehicles/for-sell`, `/vehicles/for-rent`) with their localized ES paths (`/es/vehiculos/en-venta`, `/es/vehiculos/en-alquiler`) and the reroute hook entries, plus the `VehicleFilterPanel` component (now using `VehicleImage` for optimized images).
+- Restored the buy/rent mode toggle across the hero search, inventory hub and search pill, and the **Vehicle Sales** service in the landing services section.
+
+
+
 - Lighthouse CI configuration (`.lighthouseci/lighthouserc.json`) wiring the `bun run lighthouse` script: collects the home, inventory and localized inventory routes via the preview server and asserts Performance ≥ 0.90 and Accessibility ≥ 0.95.
 - "Vehicle Delivery" service on the landing services section (replacing the former sales service), with `en`/`es` copy.
 - Responsive, build-optimized vehicle images via `@sveltejs/enhanced-img` (`<picture>` with AVIF/WebP and intrinsic dimensions); new `VehicleImage` wrapper and `getVehicleImage` slug→asset map.
@@ -19,20 +25,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Performance:** raised Lighthouse Performance from ~0.58/0.76 to ≥0.90 by optimizing images (enhanced-img, ~19MB → responsive variants) and removing render-blocking Google Fonts in favor of self-hosted/bundled fonts.
 - Upgraded `@sveltejs/vite-plugin-svelte` to v6 (required by enhanced-img and compatible with Vite 7).
-- **Rebranded** the site from "AeroDrive" to **Vicron Lopez** across navigation, footer, hero, copy, legal text, testimonials, meta tags and contact emails (`info@vicronlopez.es`).
-- **Converted the platform to rental-only.** All vehicles are now rentals priced per day; the catalog, hero search, vehicle cards and detail page present a single rental flow.
-- Simplified the vehicle data model: removed the `type` (`sale`/`rent`/`both`) field and the nested `price` object in favor of a single required `pricePerDay` number (`src/lib/schemas/vehicle.ts`, `src/lib/data/vehicles.json`).
-- Collapsed the vehicle browsing experience into a single `/vehicles` (`/es/vehiculos`) inventory; removed the buy/rent mode toggle from the hero and inventory hub.
-- Updated base URL / canonical / prerender origin to `https://vicronlopez.es` and `PUBLIC_SITE_NAME` default to `Vicron Lopez`.
+- **Rebranded** the site to **Demo Autos Rental** (demo deployment) across navigation, footer, hero, copy, legal text, testimonials, meta tags, manifest, service worker and contact emails (`info@autos-rental.hlorenzoz.com`).
+- Set the prerender origin / production URL to `https://autos-rental.hlorenzoz.com` and `PUBLIC_SITE_NAME` default to `Demo Autos Rental`.
 
 ### Fixed
 
 - Blank page in `vite dev` caused by a `@sveltejs/vite-plugin-svelte` v5 / Vite 7 mismatch (the plugin upgrade to v6 resolves the corrupted dependency optimization).
-
-### Removed
-
-- Vehicle sales feature in its entirety: the `/vehicles/for-sell` and `/vehicles/for-rent` routes (and their `/es/en-venta`, `/es/en-alquiler` localized paths), the "Vehicle Sales" service, sale pricing/badges/CTAs, and all sale-related i18n keys.
-- Orphaned `VehicleFilterPanel` component and the `getVehiclesByType` / `getVehiclePriceInfo` data helpers.
 
 ## [0.0.1] - 2026-05-29
 

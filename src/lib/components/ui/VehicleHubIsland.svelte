@@ -15,6 +15,8 @@
   }
 
   interface VehicleHubLabels {
+    buyLabel: string;
+    rentLabel: string;
     placeholder: string;
     filterLabel: string;
     filters: Array<{ label: string; value: string }>;
@@ -22,6 +24,7 @@
     clearFilters: string;
     found: string;
     bookNow: string;
+    inquire: string;
   }
 
   interface Props {
@@ -33,6 +36,7 @@
 
   let { vehicles, locale, labels, vehiclesSlug }: Props = $props();
 
+  let mode = $state<'buy' | 'rent'>('buy');
   let query = $state('');
   let filters = $state<FilterState>({});
   let activeTags = $state<string[]>([]);
@@ -42,14 +46,17 @@
 
   const filtered = $derived.by(() => {
     let result = filterVehicles(vehicles, {
+      type: mode === 'buy' ? 'sale' : 'rent',
       search: query || undefined,
       brand: filters.brand,
       category: filters.category,
-      maxPricePerDay: filters.maxPrice,
+      maxPricePerDay: mode === 'rent' ? filters.maxPrice : undefined,
+      maxPriceSale: mode === 'buy' ? filters.maxPrice : undefined,
     });
 
     if (activeTags.length > 0) {
       const catSet = new SvelteSet<string>();
+      let maxSale: number | undefined;
       let maxRent: number | undefined;
 
       for (const tag of activeTags) {
@@ -63,13 +70,17 @@
           catSet.add('sports-coupe');
         }
         if (tag === 'budget') {
+          maxSale = 50000;
           maxRent = 150;
         }
       }
 
       result = result.filter((v) => {
         if (catSet.size > 0 && !catSet.has(v.category)) return false;
-        if (maxRent !== undefined && v.pricePerDay > maxRent) return false;
+        if (maxSale !== undefined && mode === 'buy' && (v.price.sale === undefined || v.price.sale > maxSale))
+          return false;
+        if (maxRent !== undefined && mode === 'rent' && (v.price.rent === undefined || v.price.rent > maxRent))
+          return false;
         return true;
       });
     }
@@ -81,10 +92,14 @@
 <div class="w-full">
   <div class="relative z-30 mb-lg">
     <SearchPill
+      buyLabel={labels.buyLabel}
+      rentLabel={labels.rentLabel}
       placeholder={labels.placeholder}
       filterLabel={labels.filterLabel}
       {brands}
       {categories}
+      initialMode={mode}
+      onModeChange={(m) => { mode = m; }}
       onSearch={(q) => { query = q; }}
       onFilterChange={(f) => { filters = f; }}
     />
@@ -112,8 +127,9 @@
   {:else}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md lg:gap-lg">
       {#each filtered as vehicle, i (vehicle.id)}
-        {@const formatted = formatCurrency(vehicle.pricePerDay, locale)}
-        {@const suffix = ' / day'}
+        {@const price = mode === 'rent' ? vehicle.price.rent : vehicle.price.sale}
+        {@const formatted = price ? formatCurrency(price, locale) : '—'}
+        {@const suffix = mode === 'rent' ? ' / day' : ''}
         <div
           class="animate-in fade-in slide-in-from-bottom-4 duration-500 fill-mode-both"
           style="animation-delay: {i * 60}ms"
@@ -155,7 +171,7 @@
                 href={`/${locale}/${vehiclesSlug}/${vehicle.slug}`}
                 class="mt-xs block text-center bg-primary text-on-primary rounded-xl px-md py-sm text-label-caps uppercase tracking-[0.05em] font-semibold hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 active:scale-95"
               >
-                {labels.bookNow}
+                {mode === 'rent' ? labels.bookNow : labels.inquire}
               </a>
             </div>
           </article>

@@ -10,6 +10,8 @@ export const VEHICLE_CATEGORIES = [
   'truck',
 ] as const;
 
+export const VEHICLE_TYPES = ['sale', 'rent', 'both'] as const;
+
 export const vehicleSchema = z.object({
   id: z.string(),
   slug: z.string(),
@@ -17,7 +19,11 @@ export const vehicleSchema = z.object({
   model: z.string(),
   year: z.number().int().min(1900).max(2100),
   category: z.enum(VEHICLE_CATEGORIES),
-  pricePerDay: z.number().positive(),
+  type: z.enum(VEHICLE_TYPES),
+  price: z.object({
+    sale: z.number().positive().optional(),
+    rent: z.number().positive().optional(),
+  }),
   specs: z.object({
     acceleration: z.string().optional(),
     range: z.string().optional(),
@@ -35,4 +41,5 @@ export const vehiclesJsonSchema = z.object({
 });
 
 export type Vehicle = z.infer<typeof vehicleSchema>;
+export type VehicleType = typeof VEHICLE_TYPES[number];
 export type VehicleCategory = typeof VEHICLE_CATEGORIES[number];

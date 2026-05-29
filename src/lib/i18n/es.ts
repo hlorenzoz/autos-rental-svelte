@@ -2,8 +2,8 @@ import type { Dictionary } from './en';
 
 export const es: Dictionary = {
   site: {
-    name: 'Vicron Lopez',
-    description: 'Encontrá tu vehículo ideal — alquilá con confianza.',
+    name: 'Autos Alquiler y Venta',
+    description: 'Encontrá tu vehículo ideal — alquilá o comprá con confianza.',
   },
   nav: {
     home: 'Inicio',
@@ -13,14 +13,18 @@ export const es: Dictionary = {
     contact: 'Contacto',
     overview: 'Inicio',
     forRent: 'Alquiler',
+    forSale: 'Venta',
     locations: 'Ubicaciones',
     reviews: 'Reseñas',
+    sell: 'Vender',
     services: 'Servicios',
     signIn: 'Ingresar',
     phone: '+34 600 123 456',
     // Nueva estructura de navegación unificada
     links: {
       inventory: '/vehiculos/',
+      forRent: '/vehiculos/en-alquiler/',
+      forSale: '/vehiculos/en-venta/',
       contact: '/contacto/',
       about: '/sobre-nosotros/',
       sitemap: '/mapa-del-sitio/',
@@ -59,7 +63,8 @@ export const es: Dictionary = {
   hero: {
     headline: 'Redefiniendo la Movilidad.',
     subheadline:
-      'Experimentá la cúspide de la ingeniería y el diseño automotriz. Ya sea para una escapada de fin de semana o para un alquiler a largo plazo, Vicron Lopez te ofrece rendimiento y lujo incomparables.',
+      'Experimentá la cúspide de la ingeniería y el diseño automotriz. Ya sea para una escapada de fin de semana o para ser propietario, Demo Autos Rental te ofrece rendimiento y lujo incomparables.',
+    buy: 'Comprar',
     rent: 'Alquilar',
     searchPlaceholder: 'Buscá marca, modelo o tipo…',
     filterLabel: 'Filtrar',
@@ -67,11 +72,12 @@ export const es: Dictionary = {
   },
   filters: {
     all: 'Todos',
+    forSale: 'En Venta',
     forRent: 'En Alquiler',
     electric: 'Eléctrico',
     suv: 'SUV',
     luxury: 'Lujo',
-    budget: 'Menos de $150/día',
+    budget: 'Menos de $50k',
     clearFilters: 'Limpiar filtros',
     brand: 'Marca',
     category: 'Categoría',
@@ -93,25 +99,28 @@ export const es: Dictionary = {
     year: 'Año',
     available: 'Disponible',
     unavailable: 'No disponible',
+    inquire: 'Consultar',
     bookNow: 'Reservar ahora',
     allVehicles: 'Todos los Vehículos',
+    forSaleHeadline: 'Vehículos en Venta',
     forRentHeadline: 'Vehículos en Alquiler',
+    forSaleSubline: 'Encontrá tu vehículo ideal para ser propietario.',
     forRentSubline: 'Vehículos premium disponibles para alquiler a corto o largo plazo.',
-    allVehiclesSubline: 'Explorá nuestra colección completa de alquiler.',
+    allVehiclesSubline: 'Explorá nuestra colección completa — alquilá o comprá.',
   },
   features: {
     precisionTitle: 'Ingeniería de Precisión',
     precisionBody:
       'Cada vehículo de nuestra flota representa la cúspide de la perfección mecánica, rigurosamente mantenido para un rendimiento impecable.',
-    flexibleTitle: 'Alquiler Flexible',
+    flexibleTitle: 'Propiedad Flexible',
     flexibleBody:
-      'Elegí entre emociones a corto plazo o planes a largo plazo. Nuestras opciones de alquiler personalizadas se adaptan a tus demandas de estilo de vida.',
+      'Elegí entre emociones a corto plazo o un compromiso a largo plazo. Nuestros planes personalizados se adaptan a tus demandas de estilo de vida.',
     networkTitle: 'Red Global',
     networkBody:
       'Accedé a nuestra colección exclusiva en los principales centros internacionales. Movilidad sin límites, donde sea que te lleve tu viaje.',
   },
   footer: {
-    copyright: '© 2024 Vicron Lopez. Todos los derechos reservados.',
+    copyright: '© 2024 Demo Autos Rental. Todos los derechos reservados.',
     privacy: 'Política de Privacidad',
     terms: 'Términos de Servicio',
     cookies: 'Configuración de Cookies',
@@ -119,7 +128,7 @@ export const es: Dictionary = {
     company: 'Compañía',
     sitemap: 'Mapa del sitio',
     phone: '+34 600 123 456',
-    email: 'info@vicronlopez.es',
+    email: 'info@autos-rental.hlorenzoz.com',
   },
   theme: {
     toggleLight: 'Cambiar a modo claro',
@@ -127,7 +136,7 @@ export const es: Dictionary = {
   },
   contact: {
     title: 'Contactanos',
-    subtitle: '¿Tenés alguna pregunta o estás listo para encontrar tu próximo alquiler? Nos encantaría saber de vos.',
+    subtitle: '¿Tenés alguna pregunta o estás listo para encontrar tu próximo vehículo? Nos encantaría saber de vos.',
     name: 'Nombre Completo',
     namePlaceholder: 'Tu nombre completo',
     email: 'Correo Electrónico',
@@ -149,16 +158,19 @@ export const es: Dictionary = {
     directionsCta: 'Cómo llegar',
     viewOnMaps: 'Ver en Maps',
     hoursLabel: 'Lun–Sáb, 9:00–19:00',
-    mapTitle: 'Ubicación de Vicron Lopez en Ourense',
-    emailLabel: 'info@vicronlopez.es',
+    mapTitle: 'Ubicación de Demo Autos Rental en Ourense',
+    emailLabel: 'info@autos-rental.hlorenzoz.com',
   },
   vehicleDetail: {
     backToInventory: 'Volver al Inventario',
     specifications: 'Especificaciones',
     availability: 'Disponible',
     unavailable: 'No disponible',
+    forSale: 'En Venta',
     forRent: 'En Alquiler',
     bookVehicle: 'Reservar Este Vehículo',
+    inquireVehicle: 'Consultar Sobre Este Vehículo',
+    salePrice: 'Precio de Venta',
     rentPrice: 'Precio de Alquiler',
     perDay: '/ día',
     viewAll: 'Ver Todo el Inventario',
@@ -177,7 +189,7 @@ export const es: Dictionary = {
     subtitle: 'Nuestra historia, nuestra misión, nuestra pasión por la movilidad.',
     missionTitle: 'Nuestra Misión',
     missionBody:
-      'Redefinir la movilidad automotriz conectando a las personas con vehículos excepcionales para alquilar — desde una escapada de fin de semana hasta un viaje a largo plazo.',
+      'Redefinir la movilidad automotriz conectando a las personas con vehículos excepcionales — ya sea para alquilar una experiencia o para ser propietario de por vida.',
     valuesTitle: 'Nuestros Valores',
     value1Title: 'Excelencia',
     value1Body:
@@ -187,7 +199,7 @@ export const es: Dictionary = {
       'Precios claros, asesoramiento honesto y procesos directos — sin cargos ocultos.',
     value3Title: 'El Cliente Primero',
     value3Body:
-      'Tu satisfacción impulsa todo lo que hacemos. Estamos aquí antes, durante y después de cada alquiler.',
+      'Tu satisfacción impulsa todo lo que hacemos. Estamos aquí antes, durante y después de cada transacción.',
     stat1Value: '+10',
     stat1Label: 'Años de experiencia',
     stat2Value: '+200',
@@ -198,7 +210,7 @@ export const es: Dictionary = {
     stat4Label: 'Valoración media',
     commitmentTitle: 'Nuestro Compromiso con Vos',
     commitmentBody:
-      'Desde la primera consulta hasta la entrega final, respaldamos cada vehículo, cada alquiler, siempre.',
+      'Desde la primera consulta hasta la entrega final, respaldamos cada vehículo, cada acuerdo, siempre.',
     commitmentCta: 'Contactanos',
   },
   legal: {
@@ -212,7 +224,7 @@ export const es: Dictionary = {
       sections: [
         {
           title: 'Responsable del Tratamiento',
-          content: 'Vicron Lopez, con domicilio en Ourense, Galicia, España, es el responsable del tratamiento de los datos personales que el usuario facilite a través de este sitio web.',
+          content: 'Demo Autos Rental, con domicilio en Ourense, Galicia, España, es el responsable del tratamiento de los datos personales que el usuario facilite a través de este sitio web.',
         },
         {
           title: 'Datos Recogidos',
@@ -220,7 +232,7 @@ export const es: Dictionary = {
         },
         {
           title: 'Finalidad del Tratamiento',
-          content: 'Los datos se utilizan para gestionar solicitudes de alquiler de vehículos, responder consultas, enviar comunicaciones comerciales (con consentimiento) y cumplir obligaciones legales.',
+          content: 'Los datos se utilizan para gestionar solicitudes de alquiler y venta de vehículos, responder consultas, enviar comunicaciones comerciales (con consentimiento) y cumplir obligaciones legales.',
         },
         {
           title: 'Base de Legitimación',
@@ -232,7 +244,7 @@ export const es: Dictionary = {
         },
         {
           title: 'Derechos del Usuario',
-          content: 'Podés ejercer tus derechos de acceso, rectificación, supresión, oposición y portabilidad enviando un correo a: privacidad@vicronlopez.es.',
+          content: 'Podés ejercer tus derechos de acceso, rectificación, supresión, oposición y portabilidad enviando un correo a: privacidad@autos-rental.hlorenzoz.com.',
         },
         {
           title: 'Conservación',
@@ -248,19 +260,19 @@ export const es: Dictionary = {
         },
         {
           title: 'Uso del Servicio',
-          content: 'Este sitio web está destinado a la búsqueda y alquiler de vehículos. El usuario se compromete a no usar la plataforma para fines ilícitos o contrarios a estos términos.',
+          content: 'Este sitio web está destinado a la búsqueda, alquiler y compra de vehículos. El usuario se compromete a no usar la plataforma para fines ilícitos o contrarios a estos términos.',
         },
         {
           title: 'Reservas y Contratos',
-          content: 'Todas las reservas están sujetas a disponibilidad. Vicron Lopez se reserva el derecho de cancelar reservas en casos de fuerza mayor o error en los datos publicados.',
+          content: 'Todas las reservas están sujetas a disponibilidad. Demo Autos Rental se reserva el derecho de cancelar reservas en casos de fuerza mayor o error en los datos publicados.',
         },
         {
           title: 'Precios',
-          content: 'Los precios mostrados incluyen IVA salvo indicación contraria. Vicron Lopez se reserva el derecho de modificar precios sin previo aviso. El precio confirmado al momento de la reserva es vinculante.',
+          content: 'Los precios mostrados incluyen IVA salvo indicación contraria. Demo Autos Rental se reserva el derecho de modificar precios sin previo aviso. El precio confirmado al momento de la reserva es vinculante.',
         },
         {
           title: 'Responsabilidad',
-          content: 'Vicron Lopez no será responsable de daños indirectos o consecuenciales derivados del uso de los vehículos o del sitio web, salvo en los casos previstos por la ley.',
+          content: 'Demo Autos Rental no será responsable de daños indirectos o consecuenciales derivados del uso de los vehículos o del sitio web, salvo en los casos previstos por la ley.',
         },
         {
           title: 'Ley Aplicable',
@@ -324,8 +336,8 @@ export const es: Dictionary = {
     subtitle: 'Todo lo que necesitás, desde el primer vistazo hasta la entrega final.',
     rentalTitle: 'Alquiler de Vehículos',
     rentalBody: 'Alquileres a corto y largo plazo con seguro completo, asistencia 24/7 y precios transparentes.',
-    deliveryTitle: 'Entrega de Vehículos',
-    deliveryBody: 'Entrega y recogida de tu alquiler a domicilio, donde y cuando mejor te convenga.',
+    salesTitle: 'Venta de Vehículos',
+    salesBody: 'Inventario certificado con informes de inspección, financiamiento flexible y opciones de canje.',
     maintenanceTitle: 'Mantenimiento y Servicio',
     maintenanceBody: 'Equipo interno para servicios programados, inspecciones y reparaciones bajo un mismo techo.',
     insuranceTitle: 'Seguro y Cobertura',
@@ -333,20 +345,20 @@ export const es: Dictionary = {
   },
   reviews: {
     title: '¿Qué Dicen Nuestros Clientes?',
-    subtitle: 'Experiencias reales de personas que eligen Vicron Lopez.',
+    subtitle: 'Experiencias reales de personas que eligen Demo Autos Rental.',
     review1Name: 'Carlos M.',
     review1Role: 'Empresario',
     review1Body: 'Alquilé un Range Rover para un evento. Impecable de principio a fin — servicio de primera clase.',
     review2Name: 'Ana García',
     review2Role: 'Viajera Frecuente',
-    review2Body: 'Uso Vicron Lopez tres veces al año. Los vehículos siempre impecables y el equipo realmente se preocupa.',
+    review2Body: 'Uso Demo Autos Rental tres veces al año. Los vehículos siempre impecables y el equipo realmente se preocupa.',
     review3Name: 'Marco S.',
     review3Role: 'Entusiasta Automotriz',
-    review3Body: 'Alquilé un Porsche 911 a través de Vicron Lopez. Precios transparentes, vehículo impecable. Lo recomiendo.',
+    review3Body: 'Compré mi Porsche 911 a través de Demo Autos Rental. Precios transparentes, inspección detallada. Lo recomiendo.',
   },
   landingContact: {
     title: '¿Listo para Empezar?',
-    subtitle: 'Ya sea que quieras alquilar o simplemente tengas una pregunta — estamos para vos.',
+    subtitle: 'Ya sea que quieras alquilar, comprar o simplemente tengas una pregunta — estamos para vos.',
     cta: 'Contactanos',
     ctaPhone: 'Llamanos',
   },

@@ -19,6 +19,8 @@
       title: data.t.sitemap.sections.inventory,
       links: [
         { href: `/${data.locale}${data.t.nav.links.inventory}`, label: data.t.nav.inventory },
+        { href: `/${data.locale}${data.t.nav.links.forRent}`, label: data.t.nav.forRent },
+        { href: `/${data.locale}${data.t.nav.links.forSale}`, label: data.t.nav.forSale },
       ],
     },
     {

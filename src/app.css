@@ -234,6 +234,10 @@
     line-height: 1;
     display: inline-block;
     vertical-align: middle;
+    /* Icons render via lowercase ligatures; never inherit a parent's
+       text-transform (e.g. `uppercase` buttons) or the ligature breaks
+       and the raw icon name shows as fallback text. */
+    text-transform: none;
   }
 
   .material-symbols-outlined.filled {

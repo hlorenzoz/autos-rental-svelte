@@ -16,7 +16,7 @@ const config = {
     },
     prerender: {
       handleHttpError: 'fail',
-      origin: 'https://vicronlopez.es'
+      origin: 'https://autos-rental.hlorenzoz.com'
     }
   },
 };

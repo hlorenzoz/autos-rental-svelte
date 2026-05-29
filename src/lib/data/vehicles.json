@@ -7,7 +7,11 @@
       "model": "Model S Plaid",
       "year": 2024,
       "category": "electric-sedan",
-      "pricePerDay": 299,
+      "type": "both",
+      "price": {
+        "sale": 95500,
+        "rent": 299
+      },
       "specs": {
         "acceleration": "1.99s",
         "range": "396 mi",
@@ -26,7 +30,11 @@
       "model": "911 Turbo S",
       "year": 2024,
       "category": "sports-coupe",
-      "pricePerDay": 350,
+      "type": "both",
+      "price": {
+        "sale": 112000,
+        "rent": 350
+      },
       "specs": {
         "acceleration": "2.6s",
         "drivetrain": "AWD",
@@ -44,7 +52,11 @@
       "model": "Autobiography",
       "year": 2024,
       "category": "luxury-suv",
-      "pricePerDay": 320,
+      "type": "both",
+      "price": {
+        "sale": 102500,
+        "rent": 320
+      },
       "specs": {
         "drivetrain": "AWD",
         "seats": 5,
@@ -61,7 +73,11 @@
       "model": "Huracan EVO",
       "year": 2023,
       "category": "sports-coupe",
-      "pricePerDay": 340,
+      "type": "both",
+      "price": {
+        "sale": 109000,
+        "rent": 340
+      },
       "specs": {
         "acceleration": "2.9s",
         "drivetrain": "AWD",
@@ -79,7 +95,10 @@
       "model": "M5 Competition",
       "year": 2024,
       "category": "sedan",
-      "pricePerDay": 290,
+      "type": "rent",
+      "price": {
+        "rent": 290
+      },
       "specs": {
         "acceleration": "3.1s",
         "drivetrain": "AWD",
@@ -97,7 +116,11 @@
       "model": "AMG G63",
       "year": 2024,
       "category": "suv",
-      "pricePerDay": 310,
+      "type": "both",
+      "price": {
+        "sale": 99000,
+        "rent": 310
+      },
       "specs": {
         "acceleration": "4.5s",
         "drivetrain": "AWD",
@@ -115,7 +138,10 @@
       "model": "Roma",
       "year": 2023,
       "category": "convertible",
-      "pricePerDay": 340,
+      "type": "sale",
+      "price": {
+        "sale": 109000
+      },
       "specs": {
         "acceleration": "3.4s",
         "drivetrain": "RWD",
@@ -133,7 +159,11 @@
       "model": "e-tron GT",
       "year": 2024,
       "category": "electric-sedan",
-      "pricePerDay": 260,
+      "type": "both",
+      "price": {
+        "sale": 83000,
+        "rent": 260
+      },
       "specs": {
         "acceleration": "3.1s",
         "range": "238 mi",
@@ -152,7 +182,11 @@
       "model": "Land Cruiser 300",
       "year": 2024,
       "category": "suv",
-      "pricePerDay": 210,
+      "type": "both",
+      "price": {
+        "sale": 67000,
+        "rent": 210
+      },
       "specs": {
         "drivetrain": "AWD",
         "seats": 7,
@@ -169,7 +203,10 @@
       "model": "F-150 Raptor",
       "year": 2024,
       "category": "truck",
-      "pricePerDay": 200,
+      "type": "rent",
+      "price": {
+        "rent": 200
+      },
       "specs": {
         "drivetrain": "AWD",
         "seats": 5,
@@ -186,7 +223,11 @@
       "model": "X7 M60i",
       "year": 2024,
       "category": "luxury-suv",
-      "pricePerDay": 280,
+      "type": "both",
+      "price": {
+        "sale": 89500,
+        "rent": 280
+      },
       "specs": {
         "acceleration": "4.7s",
         "drivetrain": "AWD",
@@ -204,7 +245,11 @@
       "model": "EQS 580",
       "year": 2024,
       "category": "electric-sedan",
-      "pricePerDay": 220,
+      "type": "both",
+      "price": {
+        "sale": 70500,
+        "rent": 220
+      },
       "specs": {
         "acceleration": "4.1s",
         "range": "350 mi",
@@ -223,7 +268,11 @@
       "model": "Dolphin Surf",
       "year": 2026,
       "category": "electric-sedan",
-      "pricePerDay": 120,
+      "type": "both",
+      "price": {
+        "sale": 38500,
+        "rent": 120
+      },
       "specs": {
         "drivetrain": "FWD",
         "seats": 5,
@@ -240,7 +289,10 @@
       "model": "Seal (Actualización 2026)",
       "year": 2026,
       "category": "electric-sedan",
-      "pricePerDay": 180,
+      "type": "sale",
+      "price": {
+        "sale": 57500
+      },
       "specs": {
         "drivetrain": "AWD",
         "seats": 5,
@@ -257,7 +309,10 @@
       "model": "Seal U",
       "year": 2026,
       "category": "suv",
-      "pricePerDay": 150,
+      "type": "rent",
+      "price": {
+        "rent": 150
+      },
       "specs": {
         "drivetrain": "FWD",
         "seats": 5,
@@ -274,7 +329,11 @@
       "model": "Seal U DM-i",
       "year": 2026,
       "category": "suv",
-      "pricePerDay": 140,
+      "type": "both",
+      "price": {
+        "sale": 45000,
+        "rent": 140
+      },
       "specs": {
         "drivetrain": "AWD",
         "seats": 5,
@@ -291,7 +350,11 @@
       "model": "Seal 6",
       "year": 2026,
       "category": "sedan",
-      "pricePerDay": 160,
+      "type": "both",
+      "price": {
+        "sale": 51000,
+        "rent": 160
+      },
       "specs": {
         "drivetrain": "AWD",
         "seats": 5,
@@ -308,7 +371,11 @@
       "model": "Seal 6 DM-i Touring",
       "year": 2026,
       "category": "sedan",
-      "pricePerDay": 170,
+      "type": "both",
+      "price": {
+        "sale": 54500,
+        "rent": 170
+      },
       "specs": {
         "drivetrain": "AWD",
         "seats": 5,
@@ -325,7 +392,11 @@
       "model": "Sealion 7",
       "year": 2026,
       "category": "suv",
-      "pricePerDay": 190,
+      "type": "both",
+      "price": {
+        "sale": 61000,
+        "rent": 190
+      },
       "specs": {
         "drivetrain": "AWD",
         "seats": 5,
@@ -342,7 +413,10 @@
       "model": "Atto 2",
       "year": 2026,
       "category": "suv",
-      "pricePerDay": 110,
+      "type": "rent",
+      "price": {
+        "rent": 110
+      },
       "specs": {
         "drivetrain": "FWD",
         "seats": 5,
@@ -359,7 +433,10 @@
       "model": "Atto 2 DM-i",
       "year": 2026,
       "category": "suv",
-      "pricePerDay": 115,
+      "type": "sale",
+      "price": {
+        "sale": 37000
+      },
       "specs": {
         "drivetrain": "FWD",
         "seats": 5,
@@ -376,7 +453,11 @@
       "model": "Atto 3 Evo (Restyling 2026)",
       "year": 2026,
       "category": "suv",
-      "pricePerDay": 130,
+      "type": "both",
+      "price": {
+        "sale": 41500,
+        "rent": 130
+      },
       "specs": {
         "drivetrain": "FWD",
         "seats": 5,

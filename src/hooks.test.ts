@@ -11,6 +11,14 @@ describe('reroute hook (Localized URL to Technical Path)', () => {
     expect(callReroute('/es/vehiculos/')).toBe('/es/vehicles/');
   });
 
+  it('rewrites /es/vehiculos/en-alquiler/ to /es/vehicles/for-rent/', () => {
+    expect(callReroute('/es/vehiculos/en-alquiler/')).toBe('/es/vehicles/for-rent/');
+  });
+
+  it('rewrites /es/vehiculos/en-venta/ to /es/vehicles/for-sell/', () => {
+    expect(callReroute('/es/vehiculos/en-venta/')).toBe('/es/vehicles/for-sell/');
+  });
+
   it('rewrites /es/sobre-nosotros/ to /es/about/', () => {
     expect(callReroute('/es/sobre-nosotros/')).toBe('/es/about/');
   });

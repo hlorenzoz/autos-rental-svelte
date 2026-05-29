@@ -10,9 +10,10 @@
  */
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
 import { join, extname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import subsetFont from 'subset-font';
 
-const ROOT = new URL('..', import.meta.url).pathname;
+const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SRC = join(ROOT, 'src');
 const FONT_IN = join(ROOT, 'node_modules/material-symbols/material-symbols-outlined.woff2');
 const FONT_OUT = join(ROOT, 'src/lib/assets/fonts/material-symbols-outlined-subset.woff2');

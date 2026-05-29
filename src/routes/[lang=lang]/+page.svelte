@@ -16,7 +16,7 @@
 <svelte:head>
   <title>{data.t.site.name}</title>
   <meta name="description" content={data.t.site.description} />
-  <link rel="canonical" href="https://vicronlopez.es/{data.locale}/" />
+  <link rel="canonical" href="https://autos-rental.hlorenzoz.com/{data.locale}/" />
   <meta property="og:title" content={data.t.site.name} />
   <meta property="og:description" content={data.t.site.description} />
   <meta property="og:type" content="website" />

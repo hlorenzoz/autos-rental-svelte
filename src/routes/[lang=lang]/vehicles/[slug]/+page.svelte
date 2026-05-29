@@ -9,6 +9,9 @@
 
   let { data }: { data: PageData } = $props();
 
+  const hasSale = $derived(data.vehicle.price.sale !== undefined);
+  const hasRent = $derived(data.vehicle.price.rent !== undefined);
+
   const specsEntries = $derived(
     [
       data.vehicle.specs.acceleration && { icon: 'speed', label: data.t.vehicles.acceleration, value: data.vehicle.specs.acceleration },
@@ -22,7 +25,7 @@
 
 <svelte:head>
   <title>{data.vehicle.brand} {data.vehicle.model} {data.vehicle.year} | {data.t.site.name}</title>
-  <meta name="description" content="{data.t.vehicleDetail.forRent}: {data.vehicle.brand} {data.vehicle.model} — {data.t.vehicleDetail.specifications}" />
+  <meta name="description" content="{data.t.vehicleDetail.forSale}: {data.vehicle.brand} {data.vehicle.model} — {data.t.vehicleDetail.specifications}" />
 </svelte:head>
 
 <TopNavBar
@@ -67,7 +70,14 @@
         <div>
           <div class="flex flex-wrap gap-xs mb-md">
             <Badge variant="tertiary">{data.t.categories[data.vehicle.category as keyof typeof data.t.categories]}</Badge>
-            <Badge variant="secondary">{data.t.vehicleDetail.forRent}</Badge>
+            {#if data.vehicle.type === 'sale'}
+              <Badge variant="primary">{data.t.vehicleDetail.forSale}</Badge>
+            {:else if data.vehicle.type === 'rent'}
+              <Badge variant="secondary">{data.t.vehicleDetail.forRent}</Badge>
+            {:else}
+              <Badge variant="primary">{data.t.vehicleDetail.forSale}</Badge>
+              <Badge variant="secondary">{data.t.vehicleDetail.forRent}</Badge>
+            {/if}
           </div>
           <p class="text-label-caps text-on-surface-variant tracking-wider mb-xs">{data.vehicle.year} · {data.vehicle.brand}</p>
           <h1 class="text-h1 font-display font-black tracking-tight text-on-surface">{data.vehicle.model}</h1>
@@ -75,13 +85,21 @@
 
         <!-- Pricing -->
         <div class="flex flex-wrap gap-md">
-          <div class="bg-surface-container rounded-xl p-md flex-1 min-w-[140px]">
-            <p class="text-label-caps text-on-surface-variant tracking-wider mb-xs">{data.t.vehicleDetail.rentPrice}</p>
-            <p class="text-h2 font-display font-black text-secondary">
-              {formatCurrency(data.vehicle.pricePerDay, data.locale)}
-              <span class="text-body-sm font-body font-normal text-on-surface-variant">{data.t.vehicleDetail.perDay}</span>
-            </p>
-          </div>
+          {#if hasSale}
+            <div class="bg-surface-container rounded-xl p-md flex-1 min-w-[140px]">
+              <p class="text-label-caps text-on-surface-variant tracking-wider mb-xs">{data.t.vehicleDetail.salePrice}</p>
+              <p class="text-h2 font-display font-black text-primary">{formatCurrency(data.vehicle.price.sale!, data.locale)}</p>
+            </div>
+          {/if}
+          {#if hasRent}
+            <div class="bg-surface-container rounded-xl p-md flex-1 min-w-[140px]">
+              <p class="text-label-caps text-on-surface-variant tracking-wider mb-xs">{data.t.vehicleDetail.rentPrice}</p>
+              <p class="text-h2 font-display font-black text-secondary">
+                {formatCurrency(data.vehicle.price.rent!, data.locale)}
+                <span class="text-body-sm font-body font-normal text-on-surface-variant">{data.t.vehicleDetail.perDay}</span>
+              </p>
+            </div>
+          {/if}
         </div>
 
         <!-- Specs -->
@@ -109,7 +127,7 @@
               href="/{data.locale}{data.t.nav.links.contact}"
               class="flex-1 text-center bg-primary text-on-primary rounded-xl px-md py-sm text-label-caps uppercase tracking-[0.05em] font-semibold hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 active:scale-95"
             >
-              {data.t.vehicleDetail.bookVehicle}
+              {data.vehicle.type === 'rent' ? data.t.vehicleDetail.bookVehicle : data.t.vehicleDetail.inquireVehicle}
             </a>
           {:else}
             <span class="flex-1 text-center bg-surface-container text-on-surface-variant rounded-xl px-md py-sm text-label-caps uppercase tracking-[0.05em] font-semibold">

@@ -27,6 +27,8 @@ export const GET: RequestHandler = async (event) => {
       '/[lang=lang]/legal/terms': ['en', 'es'],
       '/[lang=lang]/sitemap': ['en', 'es'],
       '/[lang=lang]/vehicles': ['en', 'es'],
+      '/[lang=lang]/vehicles/for-rent': ['en', 'es'],
+      '/[lang=lang]/vehicles/for-sell': ['en', 'es'],
       '/[lang=lang]/vehicles/[slug]': slugs,
     },
     excludeRoutePatterns: [
@@ -49,6 +51,8 @@ export const GET: RequestHandler = async (event) => {
           else if (p === '/es/legal/terms') p = '/es/legal/terminos';
           // cookies remains /es/legal/cookies as per design
           else if (p === '/es/vehicles') p = '/es/vehiculos';
+          else if (p === '/es/vehicles/for-rent') p = '/es/vehiculos/en-alquiler';
+          else if (p === '/es/vehicles/for-sell') p = '/es/vehiculos/en-venta';
           else if (p.startsWith('/es/vehicles/')) {
             p = p.replace('/es/vehicles/', '/es/vehiculos/');
           }
@@ -98,6 +102,8 @@ export const GET: RequestHandler = async (event) => {
     .replaceAll('/es/sitemap', '/es/mapa-del-sitio/')
     .replaceAll('/es/legal/privacy', '/es/legal/privacidad/')
     .replaceAll('/es/legal/terms', '/es/legal/terminos/')
+    .replaceAll('/es/vehicles/for-rent', '/es/vehiculos/en-alquiler/')
+    .replaceAll('/es/vehicles/for-sell', '/es/vehiculos/en-venta/')
     .replaceAll('/es/vehicles/', '/es/vehiculos/');
 
   // Fix trailing slashes in alternates if missing
