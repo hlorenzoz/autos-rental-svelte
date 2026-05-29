@@ -39,6 +39,48 @@ After completing the code, ask the user if they want a playground link. Only cal
 
 ---
 
+## Chrome DevTools MCP
+
+The `chrome-devtools-mcp` server (https://github.com/ChromeDevTools/chrome-devtools-mcp) lets the agent control and inspect a **live Chrome instance** — real browser, real rendering — for reliable automation, in-depth debugging, and performance analysis. Use it to *verify behavior in a real browser*, never as a substitute for Playwright E2E tests in the TDD cycle.
+
+### When to use
+
+Invoke it to **observe and diagnose what actually happens in the browser**, especially:
+
+*   **Runtime debugging:** reproduce a blank page, console error, or hydration mismatch; read source-mapped stack traces and console output.
+*   **Performance analysis:** record performance traces and inspect **Core Web Vitals** (LCP, INP, CLS) before tuning — complements Lighthouse CI, which gates PRs.
+*   **Network inspection:** verify request priority, caching headers, payloads, and failed/slow requests.
+*   **Visual & layout verification:** capture screenshots to confirm Glassmorphism effects, responsive breakpoints, and theming (light/dark) render correctly across viewports.
+*   **Interaction automation:** drive clicks, typing, and form fills to reproduce a user-reported bug live.
+*   **Memory:** capture heap snapshots when investigating leaks.
+
+### When NOT to use
+
+*   As a replacement for the failing-test-first TDD workflow (Vitest/Playwright remain the source of truth).
+*   For backend, pipeline, or non-browser tasks.
+*   Do not commit code "verified" only via this MCP without the corresponding automated test.
+
+### Tool categories
+
+Input automation · Navigation · Emulation (device/viewport) · Performance (tracing) · Network · Debugging (screenshots, console, script evaluation, Lighthouse) · Memory (heap snapshots) · Extensions.
+
+### Configuration
+
+MCP client config (`command` + `args`):
+
+```json
+{
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"]
+    }
+  }
+}
+```
+
+---
+
 # Tech Stack
 
 The following stack is strictly enforced. No substitutions or alternative libraries may be introduced without explicit architectural approval.
@@ -219,17 +261,56 @@ Use these slash commands to trigger specialized agents:
 | `/state` | Manage Zustand global state stores | [`.claude/commands/state.md`](.claude/commands/state.md) |
 | `/git_commit` | Commit changes using conventional commits | [`.claude/commands/git_commit.md`](.claude/commands/git_commit.md) |
 
+### Global Skills
+
+These skills are not project slash commands; they are routed from the agent's global skill set. Invoke them according to their routing rules below.
+
+| Skill | When to use | When NOT to use |
+|-------|-------------|-----------------|
+| `modern-web-guidance` | **MANDATORY — invoke FIRST** before any HTML/CSS or client-side JS work. It searches a curated index of current web-platform best practices because training weights contain obsolete patterns. Trigger for: UI/layout (modals, dialogs, popovers, **Glassmorphism / backdrop-filter**, anchor positioning, container queries, `:has()`, `:user-valid`), scroll/motion (**View Transitions**, scroll-driven animations, parallax/reveals), performance (**Core Web Vitals** — LCP, INP, `content-visibility`, Fetch Priority, image optimization), system/web APIs (filesystem access, WebUSB, WebSockets, WebAssembly), and general frontend (forms, autofill, advanced inputs, custom scrollbars, modern component states). Adapt the framework-agnostic guides to our SvelteKit + Tailwind v4 setup. | Backend (SQL, ORMs, API routes), CI/CD pipelines (Docker, Actions), generic local scripts, ESLint, or Git operations. |
+
+**Routing**: this skill runs via `npx`, not a slash command:
+
+```sh
+# 1. Search use cases with an action-oriented query
+npx -y modern-web-guidance@latest search "<query>" --skill-version 2026_05_16-c5e7870
+# 2. Retrieve the full guide(s) by id (comma-separated for multiple)
+npx -y modern-web-guidance@latest retrieve "<id>"
+# Fallback: browse all guides if search is vague or low-similarity
+npx -y modern-web-guidance@latest list
+```
+
+> Default to **Baseline Widely available** features without fallbacks. For non-Baseline features, follow the guide's fallback recommendations unless a custom browser-support policy is documented here or in `CLAUDE.md`.
+
+### Local Skills (`.agents/skills/`)
+
+Project-local knowledge skills. **`.agents/skills/` is the single source of truth**; `.claude/skills/` contains symlinks to it so both the agent and Claude Code tooling resolve the same files — never create duplicate copies. These are deeper, stack-specific reference layers that complement the project slash commands above (e.g. `svelte-core-bestpractices` backs any `.svelte` edit; `vitest`/`zod`/`zustand` back `/test`, `/validate`, `/state`). Match by **file context** and **task context**, and load the relevant one BEFORE writing code.
+
+| Skill | When to use | Notes / routing |
+|-------|-------------|-----------------|
+| `svelte-code-writer` | **MANDATORY** whenever creating, editing, or analyzing any `.svelte`, `.svelte.ts`, or `.svelte.js` file. Provides Svelte 5 doc lookup and code analysis. | Runs via CLI: `npx @sveltejs/mcp list-sections` / lookup. Overlaps with the Svelte MCP tools above — prefer the MCP `svelte-autofixer` to validate generated code. |
+| `svelte-core-bestpractices` | Load alongside `svelte-code-writer` when writing/editing Svelte components or modules: runes (`$state`, `$derived`, `$effect`), reactivity, event handling, styling, library integration. | Knowledge only — Svelte 5 idioms. |
+| `playwright-best-practices` | Writing or debugging Playwright E2E tests: flaky tests, POM, mocking APIs, auth/OAuth, a11y (axe-core), visual/security/perf testing. | Pairs with `/e2e`. |
+| `vitest` | Writing or debugging Vitest unit/integration tests: async, mocking with `vi.*`, snapshots, test performance. | Pairs with `/test`. Does NOT cover TDD methodology itself. |
+| `zod` | Defining `z.object` schemas, `z.string` validations, `safeParse`, `z.infer`; choosing `parse()` vs `safeParse()`. | Pairs with `/validate`. |
+| `zustand` | Working on store code (`src/stores/**`), implementing actions, creating slices, managing global state. | Pairs with `/state`. |
+| `schema` | Adding or fixing schema.org structured data / JSON-LD for rich results (FAQ, product, review, breadcrumb). Relevant for the SEO requirements in *Architecture Principles*. | Knowledge only. |
+| `web-quality-audit` | On-demand Lighthouse-based audit (Performance, Accessibility, SEO, Best Practices). Use before tuning or to validate against the *Testing Strategy* thresholds. | Complements Lighthouse CI and `chrome-devtools-mcp`. |
+
 ### Auto-invoke Skills
 
 When performing these actions, ALWAYS invoke the corresponding skill FIRST:
 
 | Action | Skill |
 |--------|-------|
-| Writing or updating Vitest tests | `/test` |
-| Running or debugging Playwright tests | `/e2e` |
-| Modifying Tailwind classes or design tokens | `/style` |
-| Creating or updating Zod schemas | `/validate` |
-| Managing Zustand stores | `/state` |
+| Any HTML/CSS or client-side JS feature (glassmorphism, transitions, CWV, forms, etc.) | `modern-web-guidance` (global, FIRST) |
+| Creating/editing/analyzing any `.svelte` / `.svelte.ts` / `.svelte.js` file | `svelte-code-writer` + `svelte-core-bestpractices` |
+| Writing or updating Vitest tests | `/test` + `vitest` |
+| Running or debugging Playwright tests | `/e2e` + `playwright-best-practices` |
+| Modifying Tailwind classes or design tokens | `/style` (after `modern-web-guidance`) |
+| Creating or updating Zod schemas | `/validate` + `zod` |
+| Managing Zustand stores | `/state` + `zustand` |
+| Adding structured data / JSON-LD | `schema` |
 | Committing changes (general) | `/git_commit` |
 
 ---

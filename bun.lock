@@ -23,6 +23,7 @@
         "@typescript-eslint/parser": "^8.59.1",
         "@vitest/coverage-v8": "^3.2.4",
         "@vitest/ui": "^3.2.4",
+        "chrome-devtools-mcp": "^1.1.1",
         "eslint": "^10.3.0",
         "eslint-plugin-svelte": "^3.17.1",
         "globals": "^17.6.0",
@@ -458,6 +459,8 @@
     "chokidar": ["chokidar@4.0.3", "", { "dependencies": { "readdirp": "^4.0.1" } }, "sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA=="],
 
     "chownr": ["chownr@3.0.0", "", {}, "sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g=="],
+
+    "chrome-devtools-mcp": ["chrome-devtools-mcp@1.1.1", "", { "bin": { "chrome-devtools-mcp": "build/src/bin/chrome-devtools-mcp.js", "chrome-devtools": "build/src/bin/chrome-devtools.js" } }, "sha512-Fs/ASXAkQqvYCbJjHIx/pnShjyIoZoPxdg4J3wjaA9FLkRb2ngGnisu2AGcBIXdw5qrPkOuV/cOlGOonpsE1qw=="],
 
     "chrome-launcher": ["chrome-launcher@0.13.4", "", { "dependencies": { "@types/node": "*", "escape-string-regexp": "^1.0.5", "is-wsl": "^2.2.0", "lighthouse-logger": "^1.0.0", "mkdirp": "^0.5.3", "rimraf": "^3.0.2" } }, "sha512-nnzXiDbGKjDSK6t2I+35OAPBy5Pw/39bgkb/ZAFwMhwJbdYBp6aH+vW28ZgtjdU890Q7D+3wN/tB8N66q5Gi2A=="],
 
