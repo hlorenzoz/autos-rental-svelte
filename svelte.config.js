@@ -14,6 +14,10 @@ const config = {
     alias: {
       '@': 'src/lib',
     },
+    // Inline render-critical CSS (Tailwind global + small component styles) into
+    // the document head so it isn't a render-blocking network request on first
+    // paint. Covers the ~11KB global bundle and tiny per-component CSS.
+    inlineStyleThreshold: 12288,
     prerender: {
       handleHttpError: 'fail',
       origin: 'https://autos-rental.hlorenzoz.com'
