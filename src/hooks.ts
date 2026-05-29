@@ -7,10 +7,6 @@ export const reroute: Reroute = ({ url }) => {
     // Localized URL rewrites (public ES paths → internal technical paths)
     if (pathname === '/es/vehiculos' || pathname === '/es/vehiculos/')
       return '/es/vehicles/';
-    if (pathname === '/es/vehiculos/en-alquiler' || pathname === '/es/vehiculos/en-alquiler/')
-      return '/es/vehicles/for-rent/';
-    if (pathname === '/es/vehiculos/en-venta' || pathname === '/es/vehiculos/en-venta/')
-      return '/es/vehicles/for-sell/';
     if (pathname === '/es/sobre-nosotros' || pathname === '/es/sobre-nosotros/')
       return '/es/about/';
     if (pathname === '/es/contacto' || pathname === '/es/contacto/')
@@ -25,7 +21,7 @@ export const reroute: Reroute = ({ url }) => {
     // Dynamic vehicle slugs: /es/vehiculos/{slug}/ → /es/vehicles/{slug}/
     if (pathname.startsWith('/es/vehiculos/')) {
       const slug = pathname.replace('/es/vehiculos/', '').replace(/\/$/, '');
-      if (slug && slug !== 'en-alquiler' && slug !== 'en-venta') {
+      if (slug) {
         return `/es/vehicles/${slug}/`;
       }
     }

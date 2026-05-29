@@ -37,8 +37,6 @@
       <div class="w-full mt-lg animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-300 overflow-visible relative z-50">
         <HeroSearchIsland
           {locale}
-          buyLabel={t.hero.buy}
-          rentLabel={t.hero.rent}
           placeholder={t.hero.searchPlaceholder}
           filterLabel={t.hero.filterLabel}
           noResults={t.filters.noResults}
@@ -70,7 +68,7 @@
       <div class="absolute inset-0 bg-gradient-to-l from-surface via-transparent to-transparent z-10"></div>
       <img
         src="/vehicles/lamborghini-huracan-evo.webp"
-        alt="AeroDrive Hero"
+        alt="Vicron Lopez Hero"
         class="w-full h-full object-cover rounded-l-[120px] border-l border-y border-outline-variant/20 shadow-2xl"
         loading="eager"
         fetchpriority="high"

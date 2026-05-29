@@ -16,7 +16,7 @@ const config = {
     },
     prerender: {
       handleHttpError: 'fail',
-      origin: 'https://autos-rental.vercel.app'
+      origin: 'https://vicronlopez.es'
     }
   },
 };

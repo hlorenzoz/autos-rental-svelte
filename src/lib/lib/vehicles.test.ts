@@ -2,14 +2,11 @@ import { describe, it, expect } from 'vitest';
 import {
   getAllVehicles,
   getSearchableVehicles,
-  getVehiclesByType,
   getFeaturedVehicles,
   filterVehicles,
   getUniqueBrands,
   getUniqueCategories,
-  getVehiclePriceInfo,
 } from './vehicles';
-import type { Vehicle, VehicleType } from '../schemas/vehicle';
 
 describe('getAllVehicles', () => {
   it('returns all 22 vehicles', () => {
@@ -23,6 +20,12 @@ describe('getAllVehicles', () => {
       expect(v.brand).toBeTruthy();
       expect(v.model).toBeTruthy();
       expect(v.image).toMatch(/^\/vehicles\/.+\.webp$/);
+    }
+  });
+
+  it('every vehicle has a positive daily rental price', () => {
+    for (const v of getAllVehicles()) {
+      expect(v.pricePerDay).toBeGreaterThan(0);
     }
   });
 });
@@ -40,53 +43,8 @@ describe('getSearchableVehicles', () => {
     expect(v).toHaveProperty('category');
     expect(v).toHaveProperty('slug');
     expect(v).toHaveProperty('image');
-    expect(v).toHaveProperty('type');
-    expect(v).toHaveProperty('price');
+    expect(v).toHaveProperty('pricePerDay');
     expect(v).not.toHaveProperty('specs');
-  });
-});
-
-describe('getVehiclesByType', () => {
-  it('sale — includes vehicles with type="sale"', () => {
-    const result = getVehiclesByType('sale');
-    expect(result.some((v) => v.type === 'sale')).toBe(true);
-  });
-
-  it('sale — includes vehicles with type="both"', () => {
-    const result = getVehiclesByType('sale');
-    expect(result.some((v) => v.type === 'both')).toBe(true);
-  });
-
-  it('sale — excludes vehicles with type="rent"', () => {
-    const result = getVehiclesByType('sale');
-    expect(result.every((v) => v.type !== 'rent')).toBe(true);
-  });
-
-  it('rent — includes vehicles with type="rent"', () => {
-    const result = getVehiclesByType('rent');
-    expect(result.some((v) => v.type === 'rent')).toBe(true);
-  });
-
-  it('rent — includes vehicles with type="both"', () => {
-    const result = getVehiclesByType('rent');
-    expect(result.some((v) => v.type === 'both')).toBe(true);
-  });
-
-  it('rent — excludes vehicles with type="sale"', () => {
-    const result = getVehiclesByType('rent');
-    expect(result.every((v) => v.type !== 'sale')).toBe(true);
-  });
-
-  it('sale + rent combined cover all vehicles exactly once', () => {
-    const all = getAllVehicles();
-    const saleIds = new Set(getVehiclesByType('sale').map((v) => v.id));
-    const rentIds = new Set(getVehiclesByType('rent').map((v) => v.id));
-
-    const bothVehicles = all.filter((v) => v.type === 'both');
-    for (const v of bothVehicles) {
-      expect(saleIds.has(v.id)).toBe(true);
-      expect(rentIds.has(v.id)).toBe(true);
-    }
   });
 });
 
@@ -116,16 +74,6 @@ describe('filterVehicles', () => {
 
   it('no filters returns all vehicles', () => {
     expect(filterVehicles(all, {})).toHaveLength(all.length);
-  });
-
-  it('type="sale" includes only sale and both', () => {
-    const result = filterVehicles(all, { type: 'sale' });
-    expect(result.every((v) => v.type === 'sale' || v.type === 'both')).toBe(true);
-  });
-
-  it('type="rent" includes only rent and both', () => {
-    const result = filterVehicles(all, { type: 'rent' });
-    expect(result.every((v) => v.type === 'rent' || v.type === 'both')).toBe(true);
   });
 
   it('search="tesla" returns only Tesla vehicles (case-insensitive)', () => {
@@ -158,32 +106,24 @@ describe('filterVehicles', () => {
     expect(result.every((v) => v.brand === 'BMW')).toBe(true);
   });
 
-  it('maxPricePerDay excludes vehicles without rent price', () => {
-    const result = filterVehicles(all, { maxPricePerDay: 400 });
-    expect(result.every((v) => v.price.rent !== undefined)).toBe(true);
+  it('maxPricePerDay filters by daily price ceiling', () => {
+    const result = filterVehicles(all, { maxPricePerDay: 150 });
+    expect(result.length).toBeGreaterThan(0);
+    expect(result.every((v) => v.pricePerDay <= 150)).toBe(true);
   });
 
-  it('maxPricePerDay filters by rent price ceiling', () => {
-    const result = filterVehicles(all, { maxPricePerDay: 100 });
-    expect(result.every((v) => (v.price.rent ?? Infinity) <= 100)).toBe(true);
-  });
-
-  it('maxPriceSale excludes vehicles without sale price', () => {
-    const result = filterVehicles(all, { maxPriceSale: 200000 });
-    expect(result.every((v) => v.price.sale !== undefined)).toBe(true);
-  });
-
-  it('maxPriceSale filters by sale price ceiling', () => {
-    const result = filterVehicles(all, { maxPriceSale: 90000 });
-    expect(result.every((v) => (v.price.sale ?? Infinity) <= 90000)).toBe(true);
+  it('maxPricePerDay excludes vehicles above the ceiling', () => {
+    const cheapest = Math.min(...all.map((v) => v.pricePerDay));
+    const result = filterVehicles(all, { maxPricePerDay: cheapest - 1 });
+    expect(result).toHaveLength(0);
   });
 
   it('multiple filters are applied together (AND logic)', () => {
-    const result = filterVehicles(all, { type: 'rent', category: 'sports-coupe' });
+    const result = filterVehicles(all, { category: 'sports-coupe', maxPricePerDay: 400 });
     expect(result.length).toBeGreaterThan(0);
     for (const v of result) {
-      expect(v.type === 'rent' || v.type === 'both').toBe(true);
       expect(v.category).toBe('sports-coupe');
+      expect(v.pricePerDay).toBeLessThanOrEqual(400);
     }
   });
 
@@ -254,56 +194,5 @@ describe('getUniqueCategories', () => {
 
   it('returns empty array for empty input', () => {
     expect(getUniqueCategories([])).toHaveLength(0);
-  });
-});
-
-describe('getVehiclePriceInfo', () => {
-  const mockVehicle = (type: VehicleType, rent?: number, sale?: number): Vehicle => ({
-    id: '1',
-    slug: 'test',
-    brand: 'Test',
-    model: 'Test',
-    year: 2024,
-    category: 'electric-sedan',
-    type,
-    price: { rent, sale },
-    specs: {},
-    image: '/test.webp',
-    featured: false,
-    available: true,
-  });
-
-  it('returns rent price when type is "rent"', () => {
-    const v = mockVehicle('rent', 100);
-    const info = getVehiclePriceInfo(v);
-    expect(info.price).toBe(100);
-    expect(info.isRent).toBe(true);
-  });
-
-  it('returns sale price when type is "sale"', () => {
-    const v = mockVehicle('sale', undefined, 50000);
-    const info = getVehiclePriceInfo(v);
-    expect(info.price).toBe(50000);
-    expect(info.isRent).toBe(false);
-  });
-
-  it('returns sale price when type is "both" by default', () => {
-    const v = mockVehicle('both', 100, 50000);
-    const info = getVehiclePriceInfo(v);
-    expect(info.price).toBe(50000);
-    expect(info.isRent).toBe(false);
-  });
-
-  it('allows overriding type for "both" vehicles', () => {
-    const v = mockVehicle('both', 100, 50000);
-    const info = getVehiclePriceInfo(v, 'rent');
-    expect(info.price).toBe(100);
-    expect(info.isRent).toBe(true);
-  });
-
-  it('returns undefined if requested price is missing', () => {
-    const v = mockVehicle('rent', undefined);
-    const info = getVehiclePriceInfo(v);
-    expect(info.price).toBeUndefined();
   });
 });

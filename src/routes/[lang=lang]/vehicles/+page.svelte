@@ -42,8 +42,6 @@
         vehicles={data.vehicles}
         locale={data.locale}
         labels={{
-          buyLabel: data.t.hero.buy,
-          rentLabel: data.t.hero.rent,
           placeholder: data.t.hero.searchPlaceholder,
           filterLabel: data.t.hero.filterLabel,
           filters: [
@@ -56,7 +54,6 @@
           clearFilters: data.t.filters.clearFilters,
           found: data.t.filters.searchLabel,
           bookNow: data.t.vehicles.bookNow,
-          inquire: data.t.vehicles.inquire,
         }}
         vehiclesSlug={data.t.nav.slugs.vehicles}
       />

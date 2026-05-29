@@ -1,0 +1,48 @@
+# Changelog
+
+All notable changes to this project are documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+
+- Lighthouse CI configuration (`.lighthouseci/lighthouserc.json`) wiring the `bun run lighthouse` script: collects the home, inventory and localized inventory routes via the preview server and asserts Performance ≥ 0.90 and Accessibility ≥ 0.95.
+- "Vehicle Delivery" service on the landing services section (replacing the former sales service), with `en`/`es` copy.
+- This `CHANGELOG.md`.
+
+### Changed
+
+- **Rebranded** the site from "AeroDrive" to **Vicron Lopez** across navigation, footer, hero, copy, legal text, testimonials, meta tags and contact emails (`info@vicronlopez.es`).
+- **Converted the platform to rental-only.** All vehicles are now rentals priced per day; the catalog, hero search, vehicle cards and detail page present a single rental flow.
+- Simplified the vehicle data model: removed the `type` (`sale`/`rent`/`both`) field and the nested `price` object in favor of a single required `pricePerDay` number (`src/lib/schemas/vehicle.ts`, `src/lib/data/vehicles.json`).
+- Collapsed the vehicle browsing experience into a single `/vehicles` (`/es/vehiculos`) inventory; removed the buy/rent mode toggle from the hero and inventory hub.
+- Updated base URL / canonical / prerender origin to `https://vicronlopez.es` and `PUBLIC_SITE_NAME` default to `Vicron Lopez`.
+
+### Removed
+
+- Vehicle sales feature in its entirety: the `/vehicles/for-sell` and `/vehicles/for-rent` routes (and their `/es/en-venta`, `/es/en-alquiler` localized paths), the "Vehicle Sales" service, sale pricing/badges/CTAs, and all sale-related i18n keys.
+- Orphaned `VehicleFilterPanel` component and the `getVehiclesByType` / `getVehiclePriceInfo` data helpers.
+
+## [0.0.1] - 2026-05-29
+
+Initial foundation of the SvelteKit premium website.
+
+### Added
+
+- SvelteKit 5 application scaffold on Bun, deployed via `@sveltejs/adapter-vercel`.
+- Bilingual i18n (English / Spanish) with fully localized URLs and transparent path rewrites through a reroute hook.
+- Vehicle catalog with listing, filtering, search and individual detail pages (originally supporting sale, rent and dual-type vehicles).
+- Glassmorphism design system (Tailwind CSS v4) with light/dark theming, CSS-variable tokens and flash prevention.
+- Landing page sections: hero with live search, overview, featured vehicles, services, reviews and contact.
+- Contact form with Zod-validated schema.
+- Legal pages (privacy, terms, cookies) and a human-facing sitemap page.
+- Dynamic localized `sitemap.xml` and `robots.txt` endpoints.
+- Zod-validated environment variables.
+- Vitest unit/integration test suite with coverage and Playwright E2E configuration.
+- Sentry error monitoring and PWA strategy (manifest, service worker, offline support).
+
+[Unreleased]: https://github.com/vicronlopez/vicronlopez.es/compare/v0.0.1...HEAD
+[0.0.1]: https://github.com/vicronlopez/vicronlopez.es/releases/tag/v0.0.1

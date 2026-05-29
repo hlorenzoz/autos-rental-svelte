@@ -51,7 +51,7 @@
   <section class="relative h-[600px] lg:h-[716px] flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 bg-surface-container-low/40 z-10"></div>
     <img
-      alt="AeroDrive Luxury Dealership"
+      alt="Vicron Lopez Luxury Fleet"
       class="absolute inset-0 w-full h-full object-cover object-center z-0"
       src="/assets/images/about/hero-dealership.webp"
     />

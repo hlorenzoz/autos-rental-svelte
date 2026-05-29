@@ -20,6 +20,6 @@ describe('Environment Variables Schema', () => {
     const { env } = await import('./env');
 
     expect(env.PUBLIC_SITE_URL).toBe('http://localhost:5173');
-    expect(env.PUBLIC_SITE_NAME).toBe('Autos Rental & Sale');
+    expect(env.PUBLIC_SITE_NAME).toBe('Vicron Lopez');
   });
 });

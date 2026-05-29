@@ -17,7 +17,7 @@
       <!-- Brand -->
       <div class="md:col-span-1">
         <a href={`/${locale}/`} class="text-2xl font-black tracking-tighter font-display text-primary">
-          AeroDrive
+          Vicron Lopez
         </a>
         <p class="mt-md text-on-surface-variant font-body text-body-sm leading-relaxed">
           {t.site.description}
@@ -31,8 +31,6 @@
         </h4>
         <ul class="space-y-sm">
           <li><a href={`/${locale}${t.nav.links.inventory}`} class="text-on-surface-variant hover:text-primary transition-colors text-body-sm">{t.nav.inventory}</a></li>
-          <li><a href={`/${locale}${t.nav.links.forRent}`} class="text-on-surface-variant hover:text-primary transition-colors text-body-sm">{t.nav.forRent}</a></li>
-          <li><a href={`/${locale}${t.nav.links.forSale}`} class="text-on-surface-variant hover:text-primary transition-colors text-body-sm">{t.nav.forSale}</a></li>
         </ul>
       </div>
 
@@ -70,7 +68,7 @@
           {t.footer.phone}
         </a>
         <span class="text-on-surface-variant/30">•</span>
-        <a href="mailto:info@aerodrive.com" class="text-primary font-bold font-body text-body-sm hover:underline transition-colors">
+        <a href="mailto:info@vicronlopez.es" class="text-primary font-bold font-body text-body-sm hover:underline transition-colors">
           {t.footer.email}
         </a>
       </div>

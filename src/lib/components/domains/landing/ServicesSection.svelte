@@ -11,7 +11,7 @@
 
   const services = $derived([
     { icon: 'directions_car', title: t.services.rentalTitle, body: t.services.rentalBody },
-    { icon: 'sell', title: t.services.salesTitle, body: t.services.salesBody },
+    { icon: 'local_shipping', title: t.services.deliveryTitle, body: t.services.deliveryBody },
     { icon: 'build', title: t.services.maintenanceTitle, body: t.services.maintenanceBody },
     { icon: 'shield', title: t.services.insuranceTitle, body: t.services.insuranceBody },
   ] as const);

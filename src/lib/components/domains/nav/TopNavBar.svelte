@@ -17,8 +17,6 @@
   const navLinks = $derived([
     { href: `/${locale}/`, label: t.nav.overview },
     { href: `/${locale}${t.nav.links.inventory}`, label: t.nav.inventory },
-    { href: `/${locale}${t.nav.links.forRent}`, label: t.nav.forRent },
-    { href: `/${locale}${t.nav.links.forSale}`, label: t.nav.forSale },
     { href: `/${locale}${t.nav.links.about}`, label: t.nav.about },
     { href: `/${locale}${t.nav.links.contact}`, label: t.nav.contact },
   ]);
@@ -48,9 +46,9 @@
       <a
         href={`/${locale}/`}
         class="text-xl md:text-2xl font-black tracking-tighter font-display text-primary shrink-0"
-        aria-label="AeroDrive — Home"
+        aria-label="Vicron Lopez — Home"
       >
-        AeroDrive
+        Vicron Lopez
       </a>
 
       <!-- Desktop Nav Links -->
@@ -166,8 +164,8 @@
         style="transition-delay: {isOpen ? 300 : 0}ms"
       >
         <p class="text-label-caps text-on-surface-variant/60 mb-4">{t.contact.title}</p>
-        <a href="mailto:info@aerodrive.com" class="text-xl font-body text-on-surface hover:text-primary transition-colors">
-          info@aerodrive.com
+        <a href="mailto:info@vicronlopez.es" class="text-xl font-body text-on-surface hover:text-primary transition-colors">
+          info@vicronlopez.es
         </a>
       </div>
     </div>

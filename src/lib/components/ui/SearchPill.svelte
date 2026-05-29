@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, untrack } from 'svelte';
+  import { onMount } from 'svelte';
 
   interface FilterState {
     brand?: string;
@@ -8,43 +8,29 @@
   }
 
   interface Props {
-    buyLabel: string;
-    rentLabel: string;
     placeholder: string;
     filterLabel: string;
     brands?: string[];
     categories?: string[];
-    onModeChange?: (mode: 'buy' | 'rent') => void;
     onSearch?: (query: string) => void;
     onFilterChange?: (filters: FilterState) => void;
-    initialMode?: 'buy' | 'rent';
   }
 
   let {
-    buyLabel,
-    rentLabel,
     placeholder,
     filterLabel,
     brands = [],
     categories = [],
-    onModeChange,
     onSearch,
     onFilterChange,
-    initialMode = 'buy',
   }: Props = $props();
 
-  let mode = $state(untrack(() => initialMode));
   let query = $state('');
   let isFilterOpen = $state(false);
   let filters = $state<FilterState>({});
   let menuRef: HTMLDivElement | null = $state(null);
 
   const hasActiveFilters = $derived(!!(filters.brand || filters.category || filters.maxPrice));
-
-  function handleModeChange(next: 'buy' | 'rent') {
-    mode = next;
-    onModeChange?.(next);
-  }
 
   function handleQueryChange(e: Event) {
     const value = (e.target as HTMLInputElement).value;
@@ -90,26 +76,6 @@
 
 <div class="w-full max-w-2xl animate-in fade-in zoom-in duration-1000 delay-300 relative">
   <div class="w-full bg-surface/80 backdrop-blur-xl rounded-[2rem] sm:rounded-full p-1.5 shadow-lg border border-white/20 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-1.5 transition-all duration-300 hover:shadow-xl hover:border-white/40">
-
-    <!-- Toggle Group -->
-    <div class="bg-surface-container-high rounded-full p-1 flex items-center shrink-0">
-      <button
-        onclick={() => handleModeChange('buy')}
-        class="flex-1 sm:flex-none px-6 py-2 rounded-full text-label-sm font-black transition-all duration-300 {mode === 'buy'
-          ? 'bg-primary text-on-primary shadow-md'
-          : 'text-on-surface-variant hover:text-on-surface'}"
-      >
-        {buyLabel.toUpperCase()}
-      </button>
-      <button
-        onclick={() => handleModeChange('rent')}
-        class="flex-1 sm:flex-none px-6 py-2 rounded-full text-label-sm font-black transition-all duration-300 {mode === 'rent'
-          ? 'bg-secondary text-on-secondary shadow-md'
-          : 'text-on-surface-variant hover:text-on-surface'}"
-      >
-        {rentLabel.toUpperCase()}
-      </button>
-    </div>
 
     <!-- Search and Filter Row -->
     <div class="flex flex-1 items-center gap-1.5 min-w-0">
@@ -211,7 +177,7 @@
             for="filter-price"
             class="text-body-xs font-black text-on-surface-variant uppercase tracking-tighter opacity-70"
           >
-            Max Price {mode === 'rent' ? '($/day)' : '($)'}
+            Max Price ($/day)
           </label>
           <input
             id="filter-price"

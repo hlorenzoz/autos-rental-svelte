@@ -11,11 +11,7 @@
     category: string;
     slug: string;
     image: string;
-    type: 'sale' | 'rent' | 'both';
-    price: {
-      sale?: number;
-      rent?: number;
-    };
+    pricePerDay: number;
   }
 
   interface FilterState {
@@ -26,8 +22,6 @@
 
   interface Props {
     locale: string;
-    buyLabel: string;
-    rentLabel: string;
     placeholder: string;
     filterLabel: string;
     noResults: string;
@@ -39,8 +33,6 @@
 
   let {
     locale,
-    buyLabel,
-    rentLabel,
     placeholder,
     filterLabel,
     noResults,
@@ -50,7 +42,6 @@
     vehicles,
   }: Props = $props();
 
-  let mode = $state<'buy' | 'rent'>('buy');
   let query = $state('');
   let filters = $state<FilterState>({});
   let isDropdownVisible = $state(false);
@@ -69,14 +60,9 @@
 
     return vehicles
       .filter((v) => {
-        if (mode === 'buy' && v.type === 'rent') return false;
-        if (mode === 'rent' && v.type === 'sale') return false;
         if (filters.brand && v.brand !== filters.brand) return false;
         if (filters.category && v.category !== filters.category) return false;
-        if (filters.maxPrice) {
-          const price = mode === 'rent' ? v.price.rent : v.price.sale;
-          if (!price || price > filters.maxPrice) return false;
-        }
+        if (filters.maxPrice && v.pricePerDay > filters.maxPrice) return false;
         if (q) {
           const full = `${v.brand} ${v.model} ${v.category}`.toLowerCase();
           return full.includes(q);
@@ -87,9 +73,7 @@
   });
 
   function formatPrice(v: SearchableVehicle): string {
-    if (mode === 'buy' && v.price.sale) return `$${v.price.sale.toLocaleString()}`;
-    if (mode === 'rent' && v.price.rent) return `$${String(v.price.rent)} ${perDay}`;
-    return '';
+    return `$${String(v.pricePerDay)} ${perDay}`;
   }
 
   onMount(() => {
@@ -115,13 +99,10 @@
 <div bind:this={containerRef} class="relative w-full max-w-2xl z-50">
   <div class="relative z-10">
     <SearchPill
-      {buyLabel}
-      {rentLabel}
       {placeholder}
       {filterLabel}
       {brands}
       {categories}
-      onModeChange={(m) => { mode = m; }}
       onSearch={(q) => {
         query = q;
         isDropdownVisible = true;
@@ -130,7 +111,6 @@
         filters = f;
         isDropdownVisible = true;
       }}
-      initialMode="buy"
     />
   </div>
 

@@ -3,22 +3,19 @@
   import { getDictionary } from '@/i18n/utils';
   import type { Locale } from '@/i18n/utils';
   import { formatCurrency } from '@/lib/formatters';
-  import { getVehiclePriceInfo } from '@/lib/vehicles';
   import Badge from '@/components/ui/Badge.svelte';
   import Button from '@/components/ui/Button.svelte';
 
   interface Props {
     vehicle: Vehicle;
     locale: Locale;
-    preferredPriceType?: 'sale' | 'rent';
   }
 
-  let { vehicle, locale, preferredPriceType }: Props = $props();
+  let { vehicle, locale }: Props = $props();
   const t = $derived.by(() => getDictionary(locale));
 
-  const { price, isRent } = $derived(getVehiclePriceInfo(vehicle, preferredPriceType));
-  const formattedPrice = $derived(price ? formatCurrency(price, locale) : '—');
-  const priceSuffix = $derived(isRent ? ` ${t.vehicles.perDay}` : '');
+  const formattedPrice = $derived(formatCurrency(vehicle.pricePerDay, locale));
+  const priceSuffix = $derived(` ${t.vehicles.perDay}`);
 
   const cardLink = $derived(`/${locale}/${t.nav.slugs.vehicles}/${vehicle.slug}`);
 </script>
@@ -40,16 +37,7 @@
       <Badge variant="tertiary" class="bg-surface/80 backdrop-blur-sm">
         {t.categories[vehicle.category as keyof typeof t.categories]}
       </Badge>
-      {#if vehicle.type === 'rent'}
-        <Badge variant="secondary">{t.filters.forRent}</Badge>
-      {/if}
-      {#if vehicle.type === 'sale'}
-        <Badge variant="primary">{t.filters.forSale}</Badge>
-      {/if}
-      {#if vehicle.type === 'both'}
-        <Badge variant="primary">{t.filters.forSale}</Badge>
-        <Badge variant="secondary">{t.filters.forRent}</Badge>
-      {/if}
+      <Badge variant="secondary">{t.filters.forRent}</Badge>
     </div>
 
     {#if !vehicle.available}
@@ -114,7 +102,7 @@
         variant={vehicle.available ? 'primary' : 'secondary'}
         class="w-full justify-center text-center"
       >
-        {vehicle.type === 'rent' ? t.vehicles.bookNow : t.vehicles.inquire}
+        {t.vehicles.bookNow}
       </Button>
     </div>
   </div>

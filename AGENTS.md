@@ -132,7 +132,8 @@ Test-Driven Development is **mandatory**. Agents must execute the following work
 3.  **Implementation:** Write the minimum amount of robust code required to pass the test.
 4.  **Validation:** Run the test to ensure it passes (Green).
 5.  **Refactoring:** Clean up code, optimize, and enforce typing/linting without breaking the tests.
-6.  **Pre-commit Validation:** Ensure all pre-commit hooks (linting, type checking, test coverage) pass locally before finalizing the change.
+6.  **Changelog:** Record the change in `CHANGELOG.md` under `## [Unreleased]` (see Changelog Policy below).
+7.  **Pre-commit Validation:** Ensure all pre-commit hooks (linting, type checking, test coverage) pass locally before finalizing the change.
 
 ---
 
@@ -240,6 +241,7 @@ The repository must adhere to the following directory tree layout to maintain mo
 ├── sentry.server.config.ts # Sentry server-side configuration
 ├── tailwind.css            # Tailwind v4 base styles and @theme definitions
 ├── Justfile                # Task runner configuration
+├── CHANGELOG.md            # Keep a Changelog — updated on every feature change
 ├── package.json            # Bun package definitions and scripts
 └── vitest.config.ts        # Vitest configuration and coverage settings
 ```
@@ -324,6 +326,19 @@ When performing these actions, ALWAYS invoke the corresponding skill FIRST:
 5.  **Language Continuity:** Maintain bilingual support (es/en) for all newly generated features.
 6.  **Git Commits:** Use the global `git-commit` skill for all git operations. Do NOT execute manual `git commit` commands; leverage the skill to ensure conventional commit standards and intelligent staging.
 7.  **Design Adherence:** Agents MUST strictly follow the design patterns and architectural aesthetics defined in `DESIGN.md`. Any UI modification that deviates from these patterns without explicit justification is prohibited.
+8.  **Changelog Maintenance:** Every time a feature is implemented or updated (and for any user-facing fix or removal), the agent MUST update `CHANGELOG.md` as part of the same change — never as a separate afterthought. See the Changelog Policy below.
+
+---
+
+# Changelog Policy
+
+The project keeps a `CHANGELOG.md` following [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/).
+
+*   **Mandatory update:** Any change that adds, updates, or removes a feature, or fixes user-facing behavior, MUST add a corresponding entry. This is part of the Development Workflow (step 6) and a hard Agent Rule (#8).
+*   **Where:** Add entries under the `## [Unreleased]` heading, grouped by type: `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`.
+*   **How:** Write concise, user-facing entries (what changed and why it matters), not raw commit messages. Reference key files only when it aids understanding.
+*   **Releases:** When a version is cut, move the `Unreleased` entries under a new `## [x.y.z] - YYYY-MM-DD` heading and bump `package.json` `version` accordingly.
+*   **Scope exception:** Purely internal chores with no user-facing or developer-facing impact (e.g. formatting, comment typos) do not require an entry.
 
 ---
 
