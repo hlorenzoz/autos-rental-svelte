@@ -39,9 +39,9 @@
           </div>
 
           <!-- Content -->
-          <h3 class="text-h3 font-display font-semibold text-on-surface mb-sm">
+          <h2 class="text-h3 font-display font-semibold text-on-surface mb-sm">
             {title}
-          </h3>
+          </h2>
           <p class="text-body-md font-body text-on-surface-variant leading-relaxed">
             {body}
           </p>

@@ -20,6 +20,7 @@ export const es: Dictionary = {
     services: 'Servicios',
     signIn: 'Ingresar',
     phone: '+34 600 123 456',
+    callUs: 'Llamanos',
     // Nueva estructura de navegación unificada
     links: {
       inventory: '/vehiculos/',

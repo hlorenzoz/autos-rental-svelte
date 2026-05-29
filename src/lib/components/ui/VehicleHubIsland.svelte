@@ -156,9 +156,9 @@
                   <p class="text-label-caps text-on-surface-variant font-medium tracking-wider mb-xs">
                     {vehicle.year} · {vehicle.brand}
                   </p>
-                  <h3 class="text-h3 font-display font-bold text-on-surface leading-tight">
+                  <h2 class="text-h3 font-display font-bold text-on-surface leading-tight">
                     {vehicle.model}
-                  </h3>
+                  </h2>
                 </div>
                 <p class="text-h3 font-display font-bold text-primary text-right">
                   {formatted}

@@ -18,6 +18,7 @@ export const en = {
     services: 'Services',
     signIn: 'Sign In',
     phone: '+34 600 123 456',
+    callUs: 'Call us',
     // New unified navigation structure
     links: {
       inventory: '/vehicles/',
